@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<link rel="icon" href="../logo.jpg">
+<script>window.API_URL = "https://script.google.com/macros/s/AKfycbyjvOuItNf0S4-uCAu7SS6HOAo7AkU25b2pM0uc7J4ZPGZp-Ia9Q6kWrfByIEn-9fb6/exec";</script>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Karolinne Almeida Odontologia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Montserrat:wght@400;500;600&display=swap">
+<style>
+/* Recepção digital: coluna única de conversa; a Claudinha fala acima, o cartão de ação fica abaixo. */
+:root{
+  --bege:#F4E9DF; --off:#FAF8F4; --nude:#D9BBA8; --caramelo:#B98258; --marrom:#765442; --dourado:#C5A575;
+  --tinta:#2E2119; --suave:#5E4A3E; --branco:#FFFFFF; --ok:#3F7A55; --aviso:#A5552E;
+  --titulo:"Cormorant Garamond", Georgia, serif; --texto:"Montserrat", -apple-system, "Segoe UI", Arial, sans-serif;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0;background:var(--off);color:var(--tinta);font-family:var(--texto);font-size:17px;line-height:1.55;-webkit-text-size-adjust:100%}
+.topo{background:var(--off);border-bottom:1px solid var(--dourado);padding:14px max(16px,env(safe-area-inset-left)) 12px;text-align:center}
+.logo{width:92px;height:92px;border-radius:50%;display:block;margin:0 auto;box-shadow:0 2px 10px rgba(118,84,66,.12)}
+body.compacto .logo{width:56px;height:56px}
+.marca1{font-family:var(--titulo);font-weight:600;font-size:24px;letter-spacing:.08em;color:var(--marrom);line-height:1}
+.marca2{font-size:10px;letter-spacing:.42em;color:var(--caramelo);font-weight:500;margin-top:4px}
+.prog{display:flex;gap:4px;max-width:680px;margin:12px auto 0}
+.prog span{flex:1;height:4px;border-radius:4px;background:var(--bege)}
+.prog span.on{background:var(--caramelo)}
+.prog-rot{font-size:12px;color:var(--suave);margin-top:6px}
+main{max-width:720px;margin:0 auto;padding:18px max(16px,env(safe-area-inset-right)) 120px max(16px,env(safe-area-inset-left));display:grid;gap:14px}
+.fala{display:flex;gap:10px;align-items:flex-end}
+.fala .av{flex:none;width:52px;height:52px}
+.baloes{display:grid;gap:6px;min-width:0}
+.balao{background:var(--branco);border:1px solid var(--bege);border-radius:18px 18px 18px 6px;padding:12px 16px;font-size:18px;max-width:560px;box-shadow:0 1px 0 rgba(118,84,66,.06);animation:surge .25s ease-out both}
+.balao.eu{justify-self:end;background:var(--marrom);color:#FFF8F0;border-color:var(--marrom);border-radius:18px 18px 6px 18px}
+.nome-av{font-size:12px;color:var(--suave);font-weight:500}
+@keyframes surge{from{opacity:.0;transform:translateY(4px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.balao{animation:none}}
+.cartao{background:var(--branco);border:1px solid var(--bege);border-radius:18px;padding:18px;display:grid;gap:14px}
+h1,h2{font-family:var(--titulo);font-weight:600;color:var(--marrom);margin:0;line-height:1.15;text-wrap:balance}
+h1{font-size:30px}h2{font-size:24px}
+.cat{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--caramelo);font-weight:600}
+.pergunta{font-size:19px;font-weight:500;line-height:1.4}
+.opcoes{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(130px,1fr))}
+.rapidas{display:flex;flex-wrap:wrap;gap:8px}
+button{font-family:var(--texto);cursor:pointer}
+.btn{min-height:50px;border-radius:14px;border:1px solid var(--marrom);background:var(--marrom);color:#FFF8F0;font-weight:600;font-size:16px;padding:12px 20px;letter-spacing:.02em}
+.btn.sec{background:var(--branco);color:var(--marrom)}
+.btn.leve{background:transparent;border-color:var(--nude);color:var(--suave);font-weight:500}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.op{min-height:54px;border-radius:14px;border:1px solid var(--nude);background:var(--off);color:var(--tinta);font-size:17px;font-weight:500;padding:12px}
+.op[aria-pressed="true"]{background:var(--marrom);border-color:var(--marrom);color:#FFF8F0}
+.chip{border-radius:999px;border:1px solid var(--nude);background:var(--off);padding:10px 16px;font-size:15px;color:var(--tinta);min-height:44px}
+.chip[aria-pressed="true"]{background:var(--caramelo);border-color:var(--caramelo);color:#fff}
+.rapida{border-radius:999px;border:1px solid var(--caramelo);background:var(--branco);color:var(--marrom);padding:12px 18px;font-size:16px;font-weight:500;min-height:46px;text-align:left}
+label.campo,div.campo{display:grid;gap:6px;font-size:16px;color:var(--suave);font-weight:500}
+label.campo .obr{color:var(--aviso)}
+input[type=text],input[type=tel],input[type=email],input[type=date],textarea,select{width:100%;font:18px var(--texto);color:var(--tinta);background:var(--off);border:1px solid var(--nude);border-radius:12px;padding:12px 14px;min-height:50px}
+textarea{min-height:90px;resize:vertical}
+:focus-visible{outline:2px solid var(--caramelo);outline-offset:2px}
+.grade{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.nota{font-size:14px;color:var(--suave)}
+/* Tela inicial: duas escolhas grandes; o resto, discreto, logo abaixo */
+.principais{display:grid;gap:12px}
+.grande{display:grid;gap:2px;text-align:left;border:1.5px solid var(--marrom);background:var(--marrom);color:#FFF8F0;border-radius:18px;padding:18px 20px;min-height:76px;font-size:20px;font-weight:600;box-shadow:0 2px 10px rgba(118,84,66,.15)}
+.grande small{font-size:14px;font-weight:400;opacity:.88}
+.grande.claro{background:var(--branco);color:var(--marrom)}
+.outros-tit{font-size:14px;color:var(--suave);margin-top:6px}
+/* Data em 3 quadradinhos: dia, mês, ano */
+.data3{display:grid;grid-template-columns:1fr 1fr 1.5fr;gap:8px;max-width:340px}
+.data3 input{text-align:center;font-size:22px;letter-spacing:.04em}
+.data3-rot{display:grid;grid-template-columns:1fr 1fr 1.5fr;gap:8px;max-width:340px;font-size:13px;color:var(--suave);text-align:center}
+/* Agendamento em passos */
+.passo-rot{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--caramelo);font-weight:600}
+.lista-grande{display:grid;gap:10px}
+.dia{display:flex;justify-content:space-between;align-items:center;gap:10px;text-align:left;border:1.5px solid var(--nude);background:var(--branco);color:var(--tinta);border-radius:16px;padding:16px 18px;font-size:19px;font-weight:600;min-height:64px}
+.dia small{font-size:14px;font-weight:500;color:var(--suave);white-space:nowrap}
+.horas{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:10px}
+.hora{border:1.5px solid var(--nude);background:var(--branco);color:var(--tinta);border-radius:14px;padding:14px 8px;font-size:22px;font-weight:600;min-height:60px}
+.resumo{display:grid;gap:8px;font-size:18px}
+.resumo b{color:var(--marrom)}
+.faq{border-top:1px solid var(--bege);padding:10px 0}
+body.bio .topo,body.bio .rodape{display:none}
+body.bio main{padding-top:28px;padding-bottom:40px;gap:16px;max-width:520px}
+.bio-cab{display:grid;justify-items:center;text-align:center;gap:6px}
+.bio-cab img{width:120px;height:120px;border-radius:50%;box-shadow:0 4px 18px rgba(118,84,66,.18)}
+.bio-nome{font-family:var(--titulo);font-size:36px;font-weight:600;color:var(--marrom);line-height:1.05;margin-top:6px}
+.bio-sub{font-size:12px;letter-spacing:.45em;color:var(--caramelo);font-weight:600}
+.bio-div{color:var(--dourado);letter-spacing:.3em;font-size:14px}
+.bio-frase{color:var(--suave);font-size:16px;max-width:34ch}
+.bio-icones{display:flex;gap:12px;margin-top:4px}
+.bio-icones a{width:46px;height:46px;border-radius:12px;background:var(--branco);border:1px solid var(--bege);display:grid;place-items:center;color:var(--marrom);box-shadow:0 2px 8px rgba(118,84,66,.08)}
+.bio-card{display:grid;grid-template-columns:64px 1fr 36px;align-items:center;gap:14px;text-decoration:none;color:var(--tinta);background:var(--branco);border:1px solid var(--bege);border-radius:22px;padding:16px 16px;box-shadow:0 4px 14px rgba(118,84,66,.08);text-align:left;font:inherit;width:100%;cursor:pointer}
+.bio-card .ic{width:64px;height:64px;border-radius:50%;background:var(--off);display:grid;place-items:center;color:var(--marrom);box-shadow:inset 0 0 0 1px var(--bege)}
+.bio-card b{display:block;font-family:var(--titulo);font-size:22px;letter-spacing:.06em;color:var(--marrom);font-weight:600;text-transform:uppercase}
+.bio-card small{display:block;color:var(--suave);font-size:14px;line-height:1.4}
+.bio-card .seta{width:36px;height:36px;border-radius:50%;background:var(--off);display:grid;place-items:center;color:var(--marrom)}
+.bio-rod{text-align:center;color:var(--suave);font-size:12px;margin-top:10px}
+.orient li{margin:0 0 10px;font-size:17px}
+.fio-fig{background:var(--off);border:1px solid var(--bege);border-radius:16px;padding:10px}
+.fio-fig svg{width:100%;height:auto;display:block}
+.faq summary{cursor:pointer;font-weight:600;font-size:17px;color:var(--marrom)}
+.faq p{margin:8px 0 0}
+a.grande{display:grid}
+.notas{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.nota-bt{border:1.5px solid var(--nude);background:var(--branco);border-radius:14px;padding:10px 4px;font-size:26px;line-height:1;color:var(--caramelo);min-height:64px;display:grid;gap:4px}
+.nota-bt small{font-size:12px;color:var(--suave)}
+.nota-bt[aria-pressed="true"]{background:var(--caramelo);border-color:var(--caramelo);color:#fff}
+.nota-bt[aria-pressed="true"] small{color:#fff}
+.erro{color:var(--aviso);font-size:14px;font-weight:500}
+.caixa{background:var(--bege);border-radius:14px;padding:14px;display:grid;gap:10px}
+.codigo{font-family:ui-monospace,Menlo,monospace;font-size:28px;letter-spacing:.12em;color:var(--marrom);font-weight:600;text-align:center;background:var(--bege);border-radius:12px;padding:12px}
+.doc{max-height:52vh;overflow:auto;border:1px solid var(--bege);border-radius:12px;padding:4px 14px;background:var(--off)}
+.doc h3{font-family:var(--texto);font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--marrom);margin:14px 0 4px}
+.doc p{margin:0 0 8px;font-size:15px}
+.doc ul{margin:0 0 8px;padding-left:20px;font-size:15px}
+.ck{display:flex;gap:12px;align-items:flex-start;font-size:16px}
+.ck input{width:26px;height:26px;flex:none;accent-color:var(--marrom);margin-top:1px}
+.rev{display:grid;gap:4px;border-bottom:1px solid var(--bege);padding-bottom:10px}
+.rev dt{font-size:13px;color:var(--suave)}.rev dd{margin:0 0 6px;font-weight:500}
+.rev-cab{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.pend{background:#FBEDE5;border-radius:12px;padding:12px;color:var(--aviso)}
+.pad{width:100%;height:190px;background:#FFFDF9;border:1.5px dashed var(--caramelo);border-radius:14px;touch-action:none;display:block}
+.lista-item{display:grid;gap:8px;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));background:var(--off);border-radius:12px;padding:10px}
+.horarios{display:grid;gap:8px;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));max-height:280px;overflow:auto}
+.rodape{position:fixed;left:0;right:0;bottom:0;background:var(--off);border-top:1px solid var(--bege);padding:10px max(16px,env(safe-area-inset-right)) calc(10px + env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left));display:flex;justify-content:space-between;gap:10px;z-index:5}
+.rodape .btn{min-height:44px;padding:8px 16px;font-size:14px}
+.faixa{position:sticky;top:0;z-index:6;background:var(--aviso);color:#fff;text-align:center;padding:8px 12px;font-size:14px}
+.modal{position:fixed;inset:0;background:rgba(58,42,33,.45);display:grid;place-items:center;z-index:10;padding:16px}
+.modal .cartao{max-width:420px}
+</style>
+</head>
+<body>
+<div id="faixa" class="faixa" hidden>Sem conexão. Suas respostas estão guardadas neste aparelho. Tentaremos de novo.</div>
+<header class="topo">
+  <img id="logo" class="logo" alt="Karolinne Almeida Odontologia" hidden>
+  <div id="marca-texto"><div class="marca1">KAROLINNE ALMEIDA</div><div class="marca2">ODONTOLOGIA</div></div>
+  <div id="prog" hidden><div class="prog" id="prog-barras"></div><div class="prog-rot" id="prog-rot"></div></div>
+</header>
+<main id="app" aria-live="polite"></main>
+<nav class="rodape" id="rodape">
+  <button class="btn leve" id="b-voltar" type="button">← Voltar</button>
+  <button class="btn sec" id="b-equipe" type="button">Falar com a equipe</button>
+</nav>
+<div id="modal" class="modal" hidden></div>
+
+<script>
+"use strict";
+/* ---------- Ponte com o servidor ---------- */
+function chamar(fn) {
+  var args = Array.prototype.slice.call(arguments, 1);
+  return new Promise(function (ok, falha) {
+    var erroDe = function (e) {
+      var m = String((e && e.message) || e), r = /^(?:Error: )?([A-Z_]+): ([\s\S]*)$/.exec(m);
+      falha(r ? { codigo: r[1], msg: r[2] } : { codigo: 'CONEXAO', msg: 'Não consegui falar com o servidor. Verifique a internet e tente de novo.' });
+    };
+    if (window.API_URL) {  // cópia da Claudinha fora do Google (abre dentro do Instagram): fala com o mesmo servidor por POST
+      fetch(window.API_URL, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify({ api: fn, args: args }) })
+        .then(function (r) { return r.json(); })
+        .then(function (o) { if (o && o.ok) ok(o.r); else erroDe(o && o.erro); }, function () { erroDe(''); });
+      return;
+    }
+    google.script.run.withSuccessHandler(ok).withFailureHandler(erroDe)[fn].apply(null, args);
+  });
+}
+
+/* ---------- Estado (somente neste aparelho, apagado ao encerrar) ---------- */
+var G = { cfg: null, T: null, modo: 'link', convite: '', token: '', codigo: '', tela: 'inicio', pilha: [], qi: 0,
+  dados: { cadastro: {}, anamnese: {}, imagem: {}, cienciaPrivacidade: false }, sig: {}, protocolo: '', voltarRevisao: false };
+var CHAVE = 'ka-recepcao';
+function guardarLocal() { try { if (G.token) sessionStorage.setItem(CHAVE, JSON.stringify({ token: G.token, codigo: G.codigo, tela: G.tela, qi: G.qi, dados: G.dados })); } catch (e) {} }
+function limparLocal() { try { sessionStorage.removeItem(CHAVE); } catch (e) {} }
+var $ = function (s) { return document.querySelector(s); };
+function esc(s) { return String(s === undefined || s === null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+
+/* ---------- Avatar da Claudinha (ilustração própria) ---------- */
+function avatar(t) {
+  t = t || 52;
+  return '<svg class="av" width="' + t + '" height="' + t + '" viewBox="0 0 64 64" role="img" aria-label="Claudinha, assistente virtual">' +
+    '<defs><clipPath id="avc"><circle cx="32" cy="32" r="32"/></clipPath></defs><g clip-path="url(#avc)">' +
+    '<rect width="64" height="64" fill="#F4E9DF"/>' +
+    // cabelo (parte de trás, longo e ondulado)
+    '<path d="M16 30c0-12 7-20 16.5-20S49 18 49 30c0 7 1.5 12 3.5 16 1.5 3-1 6-4 7-3 1-6-1-7-3l-19 .5c-1 2.5-4 4-7 3-3-1-5-4-3.5-7C14 42.5 16 37 16 30z" fill="#6B4532"/>' +
+    // blazer bege com lapelas
+    '<path d="M9 64c1-10 7-15.5 15-17.5l8 7 8-7c8 2 14 7.5 15 17.5z" fill="#C9A27E"/>' +
+    '<path d="M24 46.5 32 64l-5.5-1.5L21 50z" fill="#B98258"/><path d="M40 46.5 32 64l5.5-1.5L43 50z" fill="#B98258"/>' +
+    // blusa clara
+    '<path d="M26 47.5 32 54l6-6.5L36 61h-8z" fill="#FAF8F4"/>' +
+    // pescoço e rosto
+    '<path d="M28 39h8v8.5c-2.5 2-5.5 2-8 0z" fill="#E5BFA5"/>' +
+    '<ellipse cx="32" cy="29.5" rx="10" ry="12" fill="#F1D3BE"/>' +
+    // franja lateral
+    '<path d="M21.5 29c-.5-9 4.5-15.5 11-15.5 6 0 10.5 4.5 11 11-3.5-5-9-6.5-14-5.5-3.5.8-6.5 4-8 10z" fill="#6B4532"/>' +
+    '<path d="M42.5 24c1.5 3 1.5 7 .5 11 2.5-2 3.5-6.5 2.5-10.5z" fill="#5A3A2A"/>' +
+    // sobrancelhas, olhos, sorriso e blush
+    '<path d="M25.5 26.3c1.5-.9 3.2-.9 4.5 0M34 26.3c1.3-.9 3-.9 4.5 0" stroke="#5A3A2A" stroke-width=".9" fill="none" stroke-linecap="round"/>' +
+    '<ellipse cx="27.8" cy="29.6" rx="1.2" ry="1.4" fill="#3A2A21"/><ellipse cx="36.2" cy="29.6" rx="1.2" ry="1.4" fill="#3A2A21"/>' +
+    '<circle cx="28.2" cy="29.1" r=".35" fill="#fff"/><circle cx="36.6" cy="29.1" r=".35" fill="#fff"/>' +
+    '<path d="M28.6 35.2c2 1.7 4.8 1.7 6.8 0" stroke="#B5675A" stroke-width="1.3" fill="none" stroke-linecap="round"/>' +
+    '<circle cx="25" cy="33.2" r="1.7" fill="#E9A99A" opacity=".45"/><circle cx="39" cy="33.2" r="1.7" fill="#E9A99A" opacity=".45"/>' +
+    // brinco dourado discreto
+    '<circle cx="21.8" cy="33.8" r=".9" fill="#C5A575"/>' +
+    '</g></svg>';
+}
+function fala(msgs) {
+  msgs = [].concat(msgs);
+  return '<div class="fala">' + avatar() + '<div class="baloes"><span class="nome-av">Claudinha · assistente virtual</span>' +
+    msgs.map(function (m) { return '<div class="balao">' + m + '</div>'; }).join('') + '</div></div>';
+}
+function minhaFala(t) { return '<div class="balao eu">' + esc(t) + '</div>'; }
+
+/* ---------- Progresso ---------- */
+var ETAPAS = [['identificacao', 'Identificação'], ['anamnese', 'Saúde'], ['revisao', 'Revisão'], ['documentos', 'Documentos'], ['assinatura', 'Assinatura']];
+function progresso() {
+  var i = ETAPAS.map(function (e) { return e[0]; }).indexOf(G.tela);
+  $('#prog').hidden = i < 0;
+  document.body.classList.toggle('compacto', i >= 0);
+  if (i < 0) return;
+  $('#prog-barras').innerHTML = ETAPAS.map(function (e, k) { return '<span class="' + (k <= i ? 'on' : '') + '"></span>'; }).join('');
+  $('#prog-rot').textContent = 'Etapa ' + (i + 1) + ' de ' + ETAPAS.length + ' · ' + ETAPAS[i][1];
+}
+
+/* ---------- Navegação ---------- */
+function ir(tela, semPilha) {
+  if (!semPilha && G.tela !== tela) G.pilha.push(G.tela);
+  G.tela = tela; render(); window.scrollTo(0, 0); guardarLocal(); salvarAuto();
+}
+$('#b-voltar').addEventListener('click', function () {
+  if (G.tela === 'anamnese' && G.qi > 0) { G.qi--; render(); return; }
+  if (G.tela === 'final') return;
+  var t = G.pilha.pop(); if (t) { G.tela = t; render(); window.scrollTo(0, 0); }
+});
+$('#b-equipe').addEventListener('click', function () { ir('equipe'); });
+
+/* ---------- Telas ---------- */
+var TELAS = {};
+function render() {
+  progresso();
+  $('#b-voltar').style.visibility = (G.tela === 'inicio' || G.tela === 'final') ? 'hidden' : 'visible';
+  document.body.classList.toggle('bio', G.tela === 'clinica');
+  $('#app').innerHTML = TELAS[G.tela]();
+  if (TELAS[G.tela].depois) TELAS[G.tela].depois();
+}
+function mostrarErro(e, alvo) {
+  var el = alvo ? $(alvo) : null, msg = esc(e.msg || 'Algo deu errado. Tente de novo.');
+  if (e.codigo === 'CONEXAO') $('#faixa').hidden = false;
+  if (el) el.innerHTML = '<p class="erro">' + msg + '</p>'; else $('#app').insertAdjacentHTML('afterbegin', fala('<span class="erro">' + msg + '</span>'));
+}
+
+TELAS.carregando = function () { return fala('Só um instante…'); };
+
+TELAS.inicio = function () {
+  var T = G.T.mensagens, ipad = G.modo === 'ipad';
+  var grandes = (ipad ? [['novo', 'Fazer meu cadastro', 'Ficha e informações de saúde, com segurança'], ['agendar', 'Agendar consulta', 'Escolha o dia e o horário']]
+    : [['agendar', 'Agendar consulta', 'Escolha o dia e o horário'], ['agendada', 'Já tenho consulta agendada', 'Confirmar, remarcar ou cancelar']]);
+  var outros = [['novo', 'Sou paciente novo'], ['antigo', 'Já sou paciente da clínica'], ['agendada', 'Tenho uma consulta agendada'], ['documentos', 'Preciso preencher meus documentos'], ['info', 'Quero informações sobre tratamentos'], ['agendar', 'Quero agendar uma consulta'], ['equipe', 'Preciso falar com a equipe']]
+    .filter(function (o) { return !grandes.some(function (g) { return g[0] === o[0]; }); });
+  return fala(T.saudacao.map(esc)) + fala('Como posso ajudar você hoje?') +
+    '<div class="principais" role="group" aria-label="Principais opções">' + grandes.map(function (g, i) { return '<button class="grande' + (i ? ' claro' : '') + '" type="button" data-ir="' + g[0] + '">' + esc(g[1]) + '<small>' + esc(g[2]) + '</small></button>'; }).join('') + '</div>' +
+    '<div class="outros-tit">Outros assuntos</div><div class="rapidas" role="group" aria-label="Outros assuntos">' + outros.map(function (o) { return '<button class="rapida" type="button" data-ir="' + o[0] + '">' + esc(o[1]) + '</button>'; }).join('') + '</div>';
+};
+TELAS.inicio.depois = function () {
+  document.querySelectorAll('[data-ir]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var d = b.dataset.ir;
+      if (d === 'novo') ir('boasvindas');
+      else if (d === 'documentos') ir(G.token ? retomarTela() : 'documentosMenu');
+      else ir(d);
+    });
+  });
+};
+
+TELAS.boasvindas = function () {
+  var T = G.T.mensagens;
+  return fala([esc(T.boasVindasCadastro[0]), esc(T.boasVindasCadastro[1]), esc(T.boasVindasCadastro[2])]) +
+    fala(esc(T.avisoCurto) + ' <button class="btn leve" type="button" id="ver-aviso" style="min-height:36px;padding:4px 10px;margin-top:6px">Ler aviso de privacidade</button>') +
+    '<div class="cartao"><button class="btn" type="button" id="iniciar">INICIAR CADASTRO</button><div id="msg"></div></div>';
+};
+TELAS.boasvindas.depois = function () {
+  $('#ver-aviso').addEventListener('click', mostrarAviso);
+  $('#iniciar').addEventListener('click', function () {
+    var b = this; b.disabled = true; b.textContent = 'Preparando…';
+    chamar('apiIniciar', { convite: G.convite, modo: G.modo }).then(function (r) {
+      G.token = r.token; G.codigo = r.codigo; G.convite = ''; ir('codigo');
+    }).catch(function (e) { b.disabled = false; b.textContent = 'INICIAR CADASTRO'; mostrarErro(e, '#msg'); });
+  });
+};
+function mostrarAviso() {
+  var P = G.T.privacidade;
+  $('#modal').innerHTML = '<div class="cartao" role="dialog" aria-modal="true" aria-label="Aviso de privacidade"><h2>' + esc(P.titulo) + '</h2><div class="doc">' +
+    P.secoes.map(function (s) { return '<h3>' + esc(s[0]) + '</h3><p>' + esc(s[1]) + '</p>'; }).join('') + '</div><button class="btn" type="button" id="fecha-modal">Fechar</button></div>';
+  $('#modal').hidden = false; $('#fecha-modal').focus();
+  $('#fecha-modal').addEventListener('click', function () { $('#modal').hidden = true; });
+}
+
+TELAS.codigo = function () {
+  return fala(esc(G.T.mensagens.codigo)) + '<div class="cartao"><p class="nota">' + esc(G.T.mensagens.whatsapp) + '</p><button class="btn" type="button" id="seguir">Entendi, vamos lá</button></div>';
+};
+TELAS.codigo.depois = function () { $('#seguir').addEventListener('click', function () { ir('identificacao'); }); };
+
+/* ---------- Identificação ---------- */
+function idade(nasc) {
+  var p = String(nasc || '').split('-'); if (p.length !== 3) return NaN;
+  var h = new Date(), i = h.getFullYear() - Number(p[0]), m = h.getMonth() + 1, d = h.getDate();
+  if (m < Number(p[1]) || (m === Number(p[1]) && d < Number(p[2]))) i--;
+  return i;
+}
+function campoDataHTML(id, rotulo, valor, atributos) {
+  var p = String(valor || '').split('-');
+  var caixa = function (ph, max, v, cls) { return '<input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="' + max + '" placeholder="' + ph + '" aria-label="' + ph + '" class="d3 ' + cls + '" value="' + esc(v || '') + '" autocomplete="off">'; };
+  return '<div class="campo"><span>' + rotulo + '</span><div class="data3" data-alvo="' + id + '">' + caixa('Dia', 2, p[2], 'd3d') + caixa('Mês', 2, p[1], 'd3m') + caixa('Ano', 4, p[0], 'd3a') + '</div>' +
+    '<div class="data3-rot"><span>dia</span><span>mês</span><span>ano (4 números)</span></div><input type="hidden" id="' + id + '" ' + (atributos || '') + ' value="' + esc(valor || '') + '"></div>';
+}
+/* Junta dia, mês e ano no campo escondido (aaaa-mm-dd) e pula sozinho para o próximo quadradinho. */
+document.addEventListener('input', function (e) {
+  var el = e.target; if (!el.classList || !el.classList.contains('d3')) return;
+  el.value = el.value.replace(/\D/g, '');
+  var g = el.parentNode, d = g.querySelector('.d3d').value, m = g.querySelector('.d3m').value, a = g.querySelector('.d3a').value;
+  if (el.value.length >= Number(el.maxLength) && el.nextElementSibling) el.nextElementSibling.focus();
+  var dd = Number(d), mm = Number(m), aa = Number(a), ok = a.length === 4 && dd >= 1 && dd <= 31 && mm >= 1 && mm <= 12 && aa > 1900;
+  var alvo = document.getElementById(g.dataset.alvo);
+  alvo.value = ok ? a + '-' + ('0' + mm).slice(-2) + '-' + ('0' + dd).slice(-2) : '';
+  alvo.dispatchEvent(new Event('input', { bubbles: true }));
+});
+function campoHTML(f, val) {
+  var obr = f.obrigatorio === true || f.obrigatorio === 'adulto';
+  if (f.tipo === 'data') return campoDataHTML('c-' + f.id, esc(f.rotulo) + (obr ? ' <span class="obr">*</span>' : ''), val, 'data-c="' + f.id + '"');
+  var tipo = f.tipo === 'data' ? 'date' : f.tipo === 'email' ? 'email' : f.tipo === 'tel' ? 'tel' : 'text';
+  var extra = f.tipo === 'cpf' ? ' inputmode="numeric" autocomplete="off"' : f.tipo === 'tel' ? ' autocomplete="tel"' : f.id === 'nome' ? ' autocomplete="name"' : f.tipo === 'email' ? ' autocomplete="email"' : '';
+  return '<label class="campo">' + esc(f.rotulo) + (obr ? ' <span class="obr">*</span>' : '') +
+    '<input id="c-' + f.id + '" data-c="' + f.id + '" type="' + tipo + '" value="' + esc(val) + '"' + extra + '>' + (f.nota ? '<span class="nota">' + esc(f.nota) + '</span>' : '') + '</label>';
+}
+TELAS.identificacao = function () {
+  var c = G.dados.cadastro, menor = idade(c.nascimento) < G.cfg.maioridade;
+  return fala(esc(G.T.mensagens.identificacao)) + '<div class="cartao"><h2>Seus dados</h2><div class="grade">' +
+    G.T.ficha.map(function (f) { return campoHTML(f, c[f.id]); }).join('') + '</div>' +
+    '<div id="resp" class="caixa" ' + (menor ? '' : 'hidden') + '><b>Responsável legal</b><span class="nota">' + esc(G.T.mensagens.menor) + '</span><div class="grade">' +
+    G.T.fichaResponsavel.map(function (f) { return campoHTML(f, c[f.id]); }).join('') + '</div></div>' +
+    '<div id="msg"></div><button class="btn" type="button" id="seguir">Continuar</button></div>';
+};
+TELAS.identificacao.depois = function () {
+  document.querySelectorAll('[data-c]').forEach(function (el) {
+    el.addEventListener('input', function () {
+      G.dados.cadastro[el.dataset.c] = el.value.trim(); guardarLocal();
+      if (el.dataset.c === 'nascimento') $('#resp').hidden = !(idade(el.value) < G.cfg.maioridade);
+    });
+  });
+  $('#seguir').addEventListener('click', function () {
+    var c = G.dados.cadastro, i = idade(c.nascimento);
+    if (!isNaN(i) && i < G.cfg.idadeMinima) { ir('menor14'); return; }
+    var p = pendCadastro();
+    if (p.length) { $('#msg').innerHTML = '<div class="pend">Falta conferir: ' + p.map(esc).join(', ') + '.</div>'; return; }
+    if (G.voltarRevisao) { G.voltarRevisao = false; ir('revisao'); return; }
+    G.qi = 0; ir('anamnese');
+  });
+};
+function digitos(s) { return String(s || '').replace(/\D/g, ''); }
+function cpfOk(cpf) {
+  var c = digitos(cpf); if (c.length !== 11 || /^(\d)\1{10}$/.test(c)) return false;
+  for (var t = 9; t < 11; t++) { var s = 0; for (var i = 0; i < t; i++) s += Number(c[i]) * (t + 1 - i); if (((10 * s) % 11) % 10 !== Number(c[t])) return false; }
+  return true;
+}
+function pendCadastro() {
+  var c = G.dados.cadastro, p = [], i = idade(c.nascimento), menor = i < G.cfg.maioridade;
+  if (!c.nome || c.nome.split(/\s+/).length < 2) p.push('nome completo');
+  if (!c.nascimento || isNaN(i) || i < 0 || i > 120) p.push('data de nascimento');
+  if ((!menor || c.cpf) && !cpfOk(c.cpf)) p.push('CPF válido');
+  if (digitos(c.telefone).length < 10) p.push('telefone com DDD');
+  if (c.email && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(c.email)) p.push('e-mail válido');
+  if (!c.endereco || c.endereco.length < 8) p.push('endereço');
+  if (!c.emergNome) p.push('nome do contato de emergência');
+  if (digitos(c.emergTel).length < 10) p.push('telefone do contato de emergência');
+  if (menor) {
+    if (!c.respNome || c.respNome.split(/\s+/).length < 2) p.push('nome do responsável');
+    if (!cpfOk(c.respCpf)) p.push('CPF do responsável');
+    if (!c.respParentesco) p.push('parentesco do responsável');
+    if (digitos(c.respTelefone).length < 10) p.push('telefone do responsável');
+  }
+  return p;
+}
+TELAS.menor14 = function () {
+  return fala(esc(G.T.mensagens.menorDe14)) + '<div class="rapidas"><button class="rapida" type="button" id="b1">Pedir contato da equipe</button><button class="rapida" type="button" id="b2">Corrigir a data de nascimento</button></div>';
+};
+TELAS.menor14.depois = function () { $('#b1').onclick = function () { ir('equipe'); }; $('#b2').onclick = function () { ir('identificacao'); }; };
+
+/* ---------- Anamnese inteligente ---------- */
+function perguntas() { var out = []; G.T.anamnese.forEach(function (cat) { cat.perguntas.forEach(function (q) { out.push({ cat: cat, q: q }); }); }); return out; }
+function opcoesDe(q) { return q.tipo === 'simnao' ? ['Sim', 'Não'] : q.tipo === 'simnaona' ? ['Sim', 'Não', 'Não se aplica'] : q.opcoes || []; }
+TELAS.anamnese = function () {
+  var L = perguntas(), item = L[G.qi], q = item.q, a = G.dados.anamnese, v = a[q.id];
+  var novaCat = G.qi === 0 || L[G.qi - 1].cat.id !== item.cat.id;
+  var h = (G.qi === 0 ? fala(esc(G.T.mensagens.anamneseIntro)) : '') + (novaCat ? fala(esc(item.cat.intro)) : '');
+  h += '<div class="cartao"><span class="cat">' + esc(item.cat.titulo) + ' · pergunta ' + (G.qi + 1) + ' de ' + L.length + '</span><div class="pergunta" id="pq">' + esc(q.texto) + '</div>';
+  if (q.tipo === 'texto') {
+    h += '<textarea id="txt" aria-labelledby="pq">' + esc(v) + '</textarea>';
+  } else if (q.tipo === 'multi') {
+    h += '<div class="rapidas">' + q.opcoes.map(function (o) { return '<button type="button" class="chip" data-m="' + esc(o) + '" aria-pressed="' + ((v || []).indexOf(o) >= 0) + '">' + esc(o) + '</button>'; }).join('') + '</div>';
+  } else {
+    h += '<div class="opcoes" role="group" aria-labelledby="pq">' + opcoesDe(q).map(function (o) { return '<button type="button" class="op" data-v="' + esc(o) + '" aria-pressed="' + (v === o) + '">' + esc(o) + '</button>'; }).join('') + '</div>';
+  }
+  if (v === 'Sim' && q.seSim) h += '<div class="caixa">' + q.seSim.map(function (f) { return seguimentoHTML(q, f); }).join('') + '</div>';
+  var precisaContinuar = q.tipo === 'texto' || q.tipo === 'multi' || (v === 'Sim' && q.seSim) || (v && q.tipo !== 'texto');
+  h += '<div id="msg"></div><div class="rapidas">' + (precisaContinuar ? '<button class="btn" type="button" id="prox">Continuar</button>' : '') +
+    (q.tipo === 'texto' && !q.obrigatorio ? '<button class="btn leve" type="button" id="pular">Pular</button>' : '') + '</div></div>';
+  return h;
+};
+function seguimentoHTML(q, f) {
+  var chave = q.id + '.' + f.id, v = G.dados.anamnese[chave];
+  if (f.tipo === 'texto') return '<label class="campo">' + esc(f.texto) + '<input type="text" data-s="' + chave + '" value="' + esc(v) + '"></label>';
+  if (f.tipo === 'escolha') return '<div class="campo"><span>' + esc(f.texto) + '</span><div class="rapidas">' + f.opcoes.map(function (o) { return '<button type="button" class="chip" data-e="' + chave + '" data-ev="' + esc(o) + '" aria-pressed="' + (v === o) + '">' + esc(o) + '</button>'; }).join('') + '</div></div>';
+  if (f.tipo === 'multi') return '<div class="campo"><span>' + esc(f.texto) + '</span><div class="rapidas">' + f.opcoes.map(function (o) { return '<button type="button" class="chip" data-mm="' + chave + '" data-mv="' + esc(o) + '" aria-pressed="' + ((v || []).indexOf(o) >= 0) + '">' + esc(o) + '</button>'; }).join('') + '</div></div>';
+  if (f.tipo === 'lista') {
+    var itens = v && v.length ? v : [['', '', '', '']];
+    return '<div class="campo"><span>' + esc(f.texto) + '</span>' + itens.map(function (it, i) {
+      return '<div class="lista-item">' + f.campos.map(function (cn, k) { return '<input type="text" aria-label="' + esc(cn) + '" placeholder="' + esc(cn) + '" data-l="' + chave + '" data-li="' + i + '" data-lk="' + k + '" value="' + esc(it[k]) + '">'; }).join('') + '</div>';
+    }).join('') + '<button type="button" class="btn leve" id="mais-item">+ Outro medicamento</button></div>';
+  }
+  return '';
+}
+TELAS.anamnese.depois = function () {
+  var L = perguntas(), q = L[G.qi].q, a = G.dados.anamnese;
+  document.querySelectorAll('[data-v]').forEach(function (b) {
+    b.onclick = function () {
+      a[q.id] = b.dataset.v; guardarLocal();
+      if (b.dataset.v === 'Sim' && q.seSim) { render(); var p = document.querySelector('.caixa input, .caixa button'); if (p) p.focus(); }
+      else setTimeout(avancar, 220), render();
+    };
+  });
+  document.querySelectorAll('[data-m]').forEach(function (b) {
+    b.onclick = function () { var l = a[q.id] || [], o = b.dataset.m; if (o === 'Nenhum') l = ['Nenhum']; else { l = l.filter(function (x) { return x !== 'Nenhum'; }); l = l.indexOf(o) >= 0 ? l.filter(function (x) { return x !== o; }) : l.concat(o); } a[q.id] = l; render(); };
+  });
+  document.querySelectorAll('[data-s]').forEach(function (el) { el.oninput = function () { a[el.dataset.s] = el.value; guardarLocal(); }; });
+  document.querySelectorAll('[data-e]').forEach(function (b) { b.onclick = function () { a[b.dataset.e] = b.dataset.ev; render(); }; });
+  document.querySelectorAll('[data-mm]').forEach(function (b) { b.onclick = function () { var l = a[b.dataset.mm] || [], o = b.dataset.mv; a[b.dataset.mm] = l.indexOf(o) >= 0 ? l.filter(function (x) { return x !== o; }) : l.concat(o); render(); }; });
+  document.querySelectorAll('[data-l]').forEach(function (el) {
+    el.oninput = function () { var l = a[el.dataset.l] || [['', '', '', '']]; l[+el.dataset.li] = l[+el.dataset.li] || ['', '', '', '']; l[+el.dataset.li][+el.dataset.lk] = el.value; a[el.dataset.l] = l; guardarLocal(); };
+  });
+  var mais = $('#mais-item'); if (mais) mais.onclick = function () { var k = q.id + '.lista', l = a[k] || [['', '', '', '']]; l.push(['', '', '', '']); a[k] = l; render(); };
+  var txt = $('#txt'); if (txt) { txt.oninput = function () { a[q.id] = txt.value; guardarLocal(); }; }
+  var prox = $('#prox'); if (prox) prox.onclick = function () {
+    if (q.tipo === 'texto' && q.obrigatorio && !String(a[q.id] || '').trim()) { $('#msg').innerHTML = '<p class="erro">Esta resposta é importante. Escreva com suas palavras.</p>'; return; }
+    if (q.tipo === 'multi' && !(a[q.id] || []).length) { $('#msg').innerHTML = '<p class="erro">Marque ao menos uma opção.</p>'; return; }
+    avancar();
+  };
+  var pular = $('#pular'); if (pular) pular.onclick = avancar;
+};
+function avancar() {
+  var L = perguntas();
+  if (G.voltarRevisao && (G.qi + 1 >= L.length || L[G.qi + 1].cat.id !== L[G.qi].cat.id)) { G.voltarRevisao = false; ir('revisao'); return; }
+  if (G.qi + 1 < L.length) { G.qi++; render(); window.scrollTo(0, 0); guardarLocal(); if (G.qi % 6 === 0) salvarAuto(); }
+  else ir('revisao');
+}
+
+/* ---------- Revisão ---------- */
+function respostaTexto(q) {
+  var a = G.dados.anamnese, v = a[q.id];
+  if (q.tipo === 'multi') return (v || []).join(', ');
+  if (q.tipo === 'texto') return v || '';
+  var t = v || '';
+  if (v === 'Sim' && q.seSim) {
+    var det = q.seSim.map(function (f) {
+      var fv = a[q.id + '.' + f.id];
+      if (f.tipo === 'lista') return (fv || []).map(function (it) { return it.filter(Boolean).join(' · '); }).filter(Boolean).join('; ');
+      if (f.tipo === 'multi') return (fv || []).join(', ');
+      return fv || '';
+    }).filter(Boolean);
+    if (det.length) t += ' — ' + det.join(' | ');
+  }
+  return t;
+}
+function pendAnamnese() {
+  var p = [];
+  perguntas().forEach(function (it) {
+    var q = it.q, v = G.dados.anamnese[q.id];
+    if (q.tipo === 'texto') { if (q.obrigatorio && !String(v || '').trim()) p.push(q.texto); }
+    else if (q.tipo === 'multi') { if (!v || !v.length) p.push(q.texto); }
+    else if (!v) p.push(q.texto);
+  });
+  return p;
+}
+TELAS.revisao = function () {
+  var c = G.dados.cadastro, pend = pendCadastro().concat(pendAnamnese()), h = fala(esc(G.T.mensagens.revisao));
+  if (pend.length) h += '<div class="pend"><b>Falta responder:</b><br>' + pend.map(esc).join('<br>') + '</div>';
+  h += '<div class="cartao"><div class="rev"><div class="rev-cab"><h2>Seus dados</h2><button class="btn leve" type="button" data-cor="id">Corrigir</button></div><dl>' +
+    G.T.ficha.concat(idade(c.nascimento) < G.cfg.maioridade ? G.T.fichaResponsavel : []).filter(function (f) { return c[f.id]; }).map(function (f) { return '<dt>' + esc(f.rotulo) + '</dt><dd>' + esc(c[f.id]) + '</dd>'; }).join('') + '</dl></div>';
+  var L = perguntas();
+  G.T.anamnese.forEach(function (cat) {
+    var ini = L.findIndex(function (x) { return x.cat.id === cat.id; });
+    h += '<div class="rev"><div class="rev-cab"><h2>' + esc(cat.titulo) + '</h2><button class="btn leve" type="button" data-cor="' + ini + '">Corrigir</button></div><dl>' +
+      cat.perguntas.map(function (q) { var r = respostaTexto(q); return '<dt>' + esc(q.texto) + '</dt><dd>' + (r ? esc(r) : '<span class="erro">não respondida</span>') + '</dd>'; }).join('') + '</dl></div>';
+  });
+  h += '<button class="btn" type="button" id="seguir" ' + (pend.length ? 'disabled' : '') + '>Está tudo certo, continuar</button></div>';
+  return h;
+};
+TELAS.revisao.depois = function () {
+  document.querySelectorAll('[data-cor]').forEach(function (b) {
+    b.onclick = function () { G.voltarRevisao = true; if (b.dataset.cor === 'id') ir('identificacao'); else { G.qi = +b.dataset.cor; ir('anamnese'); } };
+  });
+  $('#seguir').onclick = function () { ir('documentos'); };
+};
+
+/* ---------- Documentos ---------- */
+TELAS.documentos = function () {
+  var P = G.T.privacidade, I = G.T.imagem, im = G.dados.imagem;
+  return fala(esc(G.T.mensagens.documentos)) +
+    '<div class="cartao"><h2>' + esc(P.titulo) + '</h2><div class="doc" tabindex="0">' + P.secoes.map(function (s) { return '<h3>' + esc(s[0]) + '</h3><p>' + esc(s[1]) + '</p>'; }).join('') + '</div>' +
+    '<label class="ck"><input type="checkbox" id="ciencia" ' + (G.dados.cienciaPrivacidade ? 'checked' : '') + '><span>' + esc(P.ciencia) + '</span></label></div>' +
+    fala(esc(G.T.mensagens.imagem)) +
+    '<div class="cartao"><h2>' + esc(I.titulo) + '</h2><p>' + esc(I.intro) + '</p>' +
+    I.opcoes.map(function (o) {
+      return '<div class="caixa"><span>' + esc(o.texto) + '</span><div class="opcoes">' + ['Sim', 'Não'].map(function (v) { return '<button type="button" class="op" data-img="' + o.id + '" data-iv="' + v + '" aria-pressed="' + (im[o.id] === v) + '">' + (v === 'Sim' ? 'Autorizo' : 'Não autorizo') + '</button>'; }).join('') + '</div></div>';
+    }).join('') +
+    (im.rosto === 'Sim' ? '<label class="campo">Especifique o que autoriza (rosto, voz, quais canais)<input type="text" id="img-det" value="' + esc(im.detalhe) + '"></label>' : '') +
+    '<p class="nota">' + esc(I.termos) + '</p><div id="msg"></div><button class="btn" type="button" id="seguir">Continuar para a assinatura</button></div>';
+};
+TELAS.documentos.depois = function () {
+  $('#ciencia').onchange = function () { G.dados.cienciaPrivacidade = this.checked; guardarLocal(); };
+  document.querySelectorAll('[data-img]').forEach(function (b) { b.onclick = function () { G.dados.imagem[b.dataset.img] = b.dataset.iv; var y = window.scrollY; render(); window.scrollTo(0, y); }; });
+  var det = $('#img-det'); if (det) det.oninput = function () { G.dados.imagem.detalhe = det.value; };
+  $('#seguir').onclick = function () {
+    var p = [];
+    if (!G.dados.cienciaPrivacidade) p.push('marcar a ciência do aviso de privacidade');
+    if (G.T.imagem.opcoes.some(function (o) { return !G.dados.imagem[o.id]; })) p.push('responder todas as opções de imagem (pode ser "Não autorizo")');
+    if (p.length) { $('#msg').innerHTML = '<div class="pend">Para continuar: ' + p.join('; ') + '.</div>'; return; }
+    ir('assinatura');
+  };
+};
+
+/* ---------- Assinatura ---------- */
+function signatario() {
+  var c = G.dados.cadastro, menor = idade(c.nascimento) < G.cfg.maioridade;
+  return menor ? { nome: c.respNome, papel: 'responsável legal por ' + c.nome } : { nome: c.nome, papel: 'paciente' };
+}
+function querImagem() { return G.T.imagem.opcoes.some(function (o) { return G.dados.imagem[o.id] === 'Sim'; }); }
+TELAS.assinatura = function () {
+  var s = signatario();
+  return fala(esc(G.T.mensagens.assinatura)) + '<div class="cartao"><h2>Declaração</h2><p>' + esc(G.T.declaracaoAnamnese) + '</p>' +
+    '<span class="nota">Assinatura de ' + esc(s.nome) + ' (' + esc(s.papel) + ')</span><canvas class="pad" id="pad-declaracao" aria-label="Quadro de assinatura da declaração"></canvas>' +
+    '<button class="btn leve" type="button" data-limpa="declaracao">Limpar assinatura</button>' +
+    (querImagem() ? '<h2>Autorização de uso de imagem</h2><span class="nota">Assinatura de ' + esc(s.nome) + '</span><canvas class="pad" id="pad-imagem" aria-label="Quadro de assinatura da autorização de imagem"></canvas><button class="btn leve" type="button" data-limpa="imagem">Limpar assinatura</button>' : '') +
+    '<label class="ck"><input type="checkbox" id="confirma"><span>Confirmo que sou ' + esc(s.nome) + ' (' + esc(s.papel) + '), que li os documentos e que as informações são verdadeiras.</span></label>' +
+    '<p class="nota">Esta é uma assinatura eletrônica simples, desenhada na tela. Ela fica registrada com data, horário e identificação do atendimento. Não é uma assinatura com certificado digital.</p>' +
+    '<div id="msg"></div><button class="btn" type="button" id="enviar">Assinar e enviar</button></div>';
+};
+TELAS.assinatura.depois = function () {
+  criarPad('declaracao'); if (querImagem()) criarPad('imagem');
+  document.querySelectorAll('[data-limpa]').forEach(function (b) { b.onclick = function () { G.sig[b.dataset.limpa] = null; criarPad(b.dataset.limpa); }; });
+  $('#enviar').onclick = function () {
+    var p = [];
+    if (!G.sig.declaracao) p.push('assinar a declaração');
+    if (querImagem() && !G.sig.imagem) p.push('assinar a autorização de imagem');
+    if (!$('#confirma').checked) p.push('marcar a confirmação');
+    if (p.length) { $('#msg').innerHTML = '<div class="pend">Falta: ' + p.join(', ') + '.</div>'; return; }
+    var b = this; b.disabled = true; b.textContent = 'Enviando…';
+    enviar(b);
+  };
+};
+function enviar(b) {
+  chamar('apiFinalizar', G.token, { dados: G.dados, assinaturas: { declaracao: G.sig.declaracao, imagem: G.sig.imagem || '' }, confirmacaoIdentidade: true, aparelho: navigator.userAgent })
+    .then(function (r) { G.protocolo = r.protocolo; limparLocal(); $('#faixa').hidden = true; ir('final', true); })
+    .catch(function (e) {
+      b.disabled = false; b.textContent = 'Tentar enviar de novo';
+      if (e.codigo === 'CONEXAO') { mostrarErro(e, '#msg'); window.addEventListener('online', function on() { window.removeEventListener('online', on); $('#faixa').hidden = true; }, { once: true }); }
+      else mostrarErro(e, '#msg');
+    });
+}
+function criarPad(nome) {
+  var c = document.getElementById('pad-' + nome); if (!c) return;
+  var r = c.getBoundingClientRect(), dpr = window.devicePixelRatio || 1, ctx = c.getContext('2d'), des = false, ult = null, tracos = 0;
+  c.width = Math.max(1, r.width * dpr); c.height = Math.max(1, r.height * dpr);
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.lineCap = 'round'; ctx.lineJoin = 'round'; ctx.strokeStyle = '#22160F';
+  var pos = function (e) { var b = c.getBoundingClientRect(); return { x: e.clientX - b.left, y: e.clientY - b.top }; };
+  c.onpointerdown = function (e) { e.preventDefault(); des = true; ult = pos(e); try { c.setPointerCapture(e.pointerId); } catch (x) {} };
+  c.onpointermove = function (e) {
+    if (!des) return; e.preventDefault(); var p = pos(e);
+    ctx.lineWidth = e.pointerType === 'pen' && e.pressure ? 1 + e.pressure * 2.6 : 2.4;
+    ctx.beginPath(); ctx.moveTo(ult.x, ult.y); ctx.lineTo(p.x, p.y); ctx.stroke(); ult = p; tracos++;
+  };
+  c.onpointerup = c.onpointercancel = function () { if (!des) return; des = false; if (tracos > 3) G.sig[nome] = c.toDataURL('image/png'); };
+}
+
+/* ---------- Final ---------- */
+TELAS.final = function () {
+  var T = G.T.mensagens.final;
+  return fala([esc(T[0]), esc(T[1]), esc(T[2])]) + '<div class="cartao"><p class="nota">Para acompanhar a situação dos seus documentos, toque em "Preciso preencher meus documentos" → "Já enviei" e informe seu telefone e sua data de nascimento. Não precisa anotar nenhum código.</p>' +
+    (G.modo === 'ipad' ? '<button class="btn" type="button" id="encerrar">Encerrar e devolver o iPad</button><p class="nota">A tela será limpa automaticamente em 60 segundos.</p>' : '<button class="btn sec" type="button" id="encerrar">Voltar ao início</button>') + '</div>';
+};
+TELAS.final.depois = function () { $('#encerrar').onclick = reiniciar; if (G.modo === 'ipad') G.timerFinal = setTimeout(reiniciar, 60000); };
+function reiniciar() {
+  clearTimeout(G.timerFinal);
+  if (G.token && G.tela !== 'final') chamar('apiEncerrar', G.token).catch(function () {});
+  limparLocal();
+  G.token = ''; G.codigo = ''; G.protocolo = ''; G.qi = 0; G.pilha = []; G.sig = {}; G.voltarRevisao = false;
+  G.dados = { cadastro: {}, anamnese: {}, imagem: {}, cienciaPrivacidade: false };
+  $('#modal').hidden = true; ir('inicio', true);
+}
+
+/* ---------- Retomar ---------- */
+function retomarTela() { return G.tela && TELAS[G.tela] && G.tela !== 'inicio' ? G.tela : 'identificacao'; }
+TELAS.documentosMenu = function () {
+  return fala('Você já começou o preenchimento antes ou vai começar agora?') +
+    '<div class="rapidas"><button class="rapida" type="button" id="b1">Vou começar agora</button><button class="rapida" type="button" id="b2">Continuar de onde parei</button><button class="rapida" type="button" id="b3">Já enviei: quero saber a situação</button></div>';
+};
+TELAS.documentosMenu.depois = function () { $('#b1').onclick = function () { ir('boasvindas'); }; $('#b2').onclick = function () { ir('retomar'); }; $('#b3').onclick = function () { ir('statusDocs'); }; };
+TELAS.retomar = function () {
+  return fala('Digite o telefone e a data de nascimento que você informou no cadastro.') +
+    '<div class="cartao"><label class="campo">Telefone<input type="tel" id="r-cod" autocomplete="tel"></label>' +
+    campoDataHTML('r-nasc', 'Data de nascimento') + '<div id="msg"></div><button class="btn" type="button" id="r-ok">Continuar</button></div>';
+};
+TELAS.retomar.depois = function () {
+  $('#r-ok').onclick = function () {
+    var b = this; b.disabled = true;
+    chamar('apiRetomar', $('#r-cod').value, $('#r-nasc').value).then(function (r) {
+      G.token = r.token; G.codigo = ''; G.dados = Object.assign({ cadastro: {}, anamnese: {}, imagem: {}, cienciaPrivacidade: false }, r.dados || {});
+      var etapa = TELAS[r.etapa] ? r.etapa : 'identificacao'; ir(etapa);
+    }).catch(function (e) { b.disabled = false; mostrarErro(e, '#msg'); });
+  };
+};
+
+/* ---------- Outros atendimentos ---------- */
+function formContato(titulo, extra, botao) {
+  return '<div class="cartao"><h2>' + titulo + '</h2><div class="grade"><label class="campo">Nome <span class="obr">*</span><input type="text" id="f-nome" autocomplete="name"></label>' +
+    '<label class="campo">Telefone com DDD <span class="obr">*</span><input type="tel" id="f-tel" autocomplete="tel"></label></div>' + (extra || '') +
+    '<p class="nota">' + esc(G.T.mensagens.whatsapp) + '</p><div id="msg"></div><button class="btn" type="button" id="f-ok">' + botao + '</button></div>';
+}
+TELAS.antigo = function () { return fala(esc(G.T.mensagens.pacienteAntigo)) + formContato('Pedido de link de atualização', '', 'Pedir meu link'); };
+TELAS.antigo.depois = function () { ligarContato('Atualização de cadastro (paciente da clínica)', 'Pronto! A equipe vai enviar seu link pessoal de atualização pelo WhatsApp. Ele vale por 72 horas.'); };
+TELAS.equipe = function () {
+  return fala(esc(G.T.mensagens.equipe) + '<br>Telefone da clínica: <b>' + esc(G.cfg.telefone) + '</b>') +
+    formContato('Falar com a equipe', '<label class="campo">Assunto (sem informações de saúde)<input type="text" id="f-assunto" maxlength="200"></label>', 'Enviar pedido de contato');
+};
+TELAS.equipe.depois = function () { ligarContato(null, 'Recebido! A equipe vai entrar em contato com você.'); };
+function ligarContato(assuntoFixo, okMsg) {
+  $('#f-ok').onclick = function () {
+    var b = this; b.disabled = true;
+    chamar('apiRecado', { nome: $('#f-nome').value, telefone: $('#f-tel').value, assunto: assuntoFixo || ($('#f-assunto') ? $('#f-assunto').value : '') })
+      .then(function () { $('#app').innerHTML = fala(esc(okMsg)) + '<button class="btn sec" type="button" id="vi">Voltar ao início</button>'; $('#vi').onclick = function () { ir('inicio'); }; })
+      .catch(function (e) { b.disabled = false; mostrarErro(e, '#msg'); });
+  };
+}
+TELAS.agendada = function () {
+  return fala([esc(G.T.mensagens.consultaAgendada)]) + '<div class="rapidas"><button class="rapida" type="button" id="b0">Ver, confirmar, remarcar ou cancelar minha consulta</button><button class="rapida" type="button" id="b1">Preencher meu cadastro agora</button><button class="rapida" type="button" id="b2">Continuar de onde parei</button><button class="rapida" type="button" id="b3">Ver orientações para a consulta</button></div>';
+};
+TELAS.agendada.depois = function () { $('#b0').onclick = function () { ir('minhaConsulta'); }; $('#b1').onclick = function () { ir('boasvindas'); }; $('#b2').onclick = function () { ir('retomar'); }; $('#b3').onclick = function () { $('#app').insertAdjacentHTML('beforeend', fala('<b>Orientações</b><br>' + G.T.orientacoes.map(esc).join('<br>'))); }; };
+TELAS.minhaConsulta = function () {
+  return fala(esc(G.T.mensagens.minhaConsulta)) + '<div class="cartao"><div class="grade"><label class="campo">Telefone usado no agendamento<input type="tel" id="mc-tel" autocomplete="tel"></label>' + campoDataHTML('mc-nasc', 'Data de nascimento') + '</div><div id="msg"></div><button class="btn" type="button" id="mc-ok">Buscar minha consulta</button></div>';
+};
+TELAS.minhaConsulta.depois = function () {
+  $('#mc-ok').onclick = function () {
+    var b = this, cod = $('#mc-nasc').value, tel = $('#mc-tel').value;
+    if (!cod || !tel) { mostrarErro({ msg: 'Preencha o telefone e a data de nascimento.' }, '#msg'); return; }
+    b.disabled = true;
+    chamar('apiMinhaConsulta', cod, tel).then(function (r) { G.consulta = { codigo: cod, telefone: tel, r: r }; ir('consultaDetalhe'); }).catch(function (e) { b.disabled = false; mostrarErro(e, '#msg'); });
+  };
+};
+TELAS.consultaDetalhe = function () {
+  var r = G.consulta.r;
+  var st = r.status === 'confirmada' ? 'confirmada' + (r.presenca ? ' · presença confirmada' : '') : 'aguardando confirmação da equipe';
+  return fala(['Encontrei sua consulta: <b>' + esc(r.rotulo) + '</b> (' + esc(st) + ').', '<b>Orientações</b><br>' + G.T.orientacoes.map(esc).join('<br>')]) +
+    '<div class="cartao"><div class="rapidas">' + (r.status === 'confirmada' && !r.presenca ? '<button class="btn" type="button" data-ac="presenca">Confirmar presença</button>' : '') +
+    (r.podeAlterar ? '<button class="btn sec" type="button" data-ac="remarcar">Remarcar</button><button class="btn sec" type="button" data-ac="cancelar">Cancelar consulta</button>' : '') + '</div>' +
+    (r.podeAlterar ? '' : '<p class="nota">Faltam menos de ' + G.cfg.prazoAlteracao + ' horas para a consulta. Para remarcar ou cancelar, fale com a equipe: ' + esc(G.cfg.telefone) + '.</p>') + '<div id="msg"></div></div>';
+};
+TELAS.consultaDetalhe.depois = function () {
+  document.querySelectorAll('[data-ac]').forEach(function (b) {
+    b.onclick = function () {
+      var ac = b.dataset.ac;
+      if (ac === 'remarcar') { ir('remarcar'); return; }
+      if (ac === 'cancelar' && !b.dataset.confirmar) { b.dataset.confirmar = '1'; b.textContent = 'Toque de novo para confirmar o cancelamento'; return; }
+      b.disabled = true;
+      chamar('apiAcaoConsulta', G.consulta.codigo, G.consulta.telefone, ac, '').then(function (r) { $('#app').innerHTML = fala(esc(r.mensagem)) + '<button class="btn sec" type="button" id="vi">Voltar ao início</button>'; $('#vi').onclick = function () { ir('inicio'); }; })
+        .catch(function (e) { b.disabled = false; mostrarErro(e, '#msg'); });
+    };
+  });
+};
+TELAS.remarcar = function () {
+  return fala('Escolha o novo horário. ' + (G.cfg.modoAgenda === 'automatico' ? 'A mudança é feita na hora.' : 'A equipe confirma a mudança; sua consulta atual continua valendo até lá.')) +
+    '<div class="cartao"><div id="horarios" class="horarios"><span class="nota">Carregando horários…</span></div><div id="msg"></div><button class="btn" type="button" id="rm-ok">Remarcar</button></div>';
+};
+TELAS.remarcar.depois = function () {
+  var esc2 = carregarHorarios();
+  $('#rm-ok').onclick = function () {
+    var b = this, h = esc2(); if (!h) { $('#msg').innerHTML = '<p class="erro">Escolha um horário.</p>'; return; }
+    b.disabled = true;
+    chamar('apiAcaoConsulta', G.consulta.codigo, G.consulta.telefone, 'remarcar', h).then(function (r) { $('#app').innerHTML = fala(esc(r.mensagem)) + '<button class="btn sec" type="button" id="vi">Voltar ao início</button>'; $('#vi').onclick = function () { ir('inicio'); }; })
+      .catch(function (e) { b.disabled = false; mostrarErro(e, '#msg'); });
+  };
+};
+function carregarHorarios() {
+  var escolhido = '';
+  chamar('apiHorarios').then(function (hs) {
+    $('#horarios').innerHTML = hs.length ? hs.map(function (h) { return '<button type="button" class="chip" data-h="' + esc(h.inicio) + '" aria-pressed="false">' + esc(h.rotulo) + (h.solicitado ? ' · já há pedido' : '') + '</button>'; }).join('') : '<span class="nota">Sem horários livres nas próximas semanas.</span>';
+    document.querySelectorAll('[data-h]').forEach(function (b) { b.onclick = function () { document.querySelectorAll('[data-h]').forEach(function (x) { x.setAttribute('aria-pressed', 'false'); }); b.setAttribute('aria-pressed', 'true'); escolhido = b.dataset.h; }; });
+  }).catch(function () { $('#horarios').innerHTML = '<span class="nota">Não consegui carregar a agenda agora.</span>'; });
+  return function () { return escolhido; };
+}
+TELAS.statusDocs = function () {
+  return fala('Para ver a situação dos seus documentos, digite o telefone e a data de nascimento que você informou no cadastro.') +
+    '<div class="cartao"><label class="campo">Telefone<input type="tel" id="sd-prot" autocomplete="tel"></label>' + campoDataHTML('sd-nasc', 'Data de nascimento') + '<div id="msg"></div><button class="btn" type="button" id="sd-ok">Ver situação</button></div>';
+};
+TELAS.statusDocs.depois = function () {
+  $('#sd-ok').onclick = function () {
+    var b = this; b.disabled = true;
+    chamar('apiStatusDocumentos', $('#sd-prot').value, $('#sd-nasc').value).then(function (r) { $('#app').innerHTML = fala(esc(r.situacao)) + '<button class="btn sec" type="button" id="vi">Voltar ao início</button>'; $('#vi').onclick = function () { ir('inicio'); }; })
+      .catch(function (e) { b.disabled = false; mostrarErro(e, '#msg'); });
+  };
+};
+
+/* ---------- Documentos do tratamento (Momento B) ---------- */
+TELAS.tratamento = function () {
+  var T = G.trat, d = T.docs[T.i], c = T.campos[d.id] || {}, r = T.resp[d.id] = T.resp[d.id] || {};
+  var h = (T.i === 0 ? fala(esc(G.T.mensagens.tratamento)) : '') + '<div class="cartao"><span class="cat">Documento ' + (T.i + 1) + ' de ' + T.docs.length + '</span><h2>' + esc(d.titulo) + '</h2><div class="doc" tabindex="0">';
+  d.itens.forEach(function (it) {
+    if (it.t === 'h') h += '<h3>' + esc(it.x) + '</h3>';
+    else if (it.t === 'p') h += '<p>' + esc(it.x) + '</p>';
+    else if (it.t === 'li') h += '<ul>' + it.x.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ul>';
+    else if (it.t === 'f' && it.who === 'd') h += c[it.k] ? '<p><b>' + esc(it.l) + ':</b> ' + esc(c[it.k]) + '</p>' : '';
+    else if (it.t === 'plano') h += '<p>' + T.plano.filter(function (x) { return x.p; }).map(function (x) { return '<b>' + esc(x.p) + '</b> ' + esc(x.d) + ' · R$ ' + esc(x.v); }).join('<br>') + '</p>';
+  });
+  h += '</div>';
+  d.itens.forEach(function (it) {
+    if (it.t === 'f' && it.who === 'p') h += '<label class="campo">' + esc(it.l) + (it.req ? ' <span class="obr">*</span>' : '') + '<textarea data-tr="' + it.k + '">' + esc(r[it.k]) + '</textarea></label>';
+    if (it.t === 'ck') h += '<label class="ck"><input type="checkbox" data-trc="' + it.k + '"' + (r[it.k] ? ' checked' : '') + '><span>' + esc(it.l) + '</span></label>';
+  });
+  h += '<span class="nota">Assinatura de ' + esc(T.signatario) + '</span><canvas class="pad" id="pad-trat" aria-label="Quadro de assinatura"></canvas><button class="btn leve" type="button" id="limpa-trat">Limpar assinatura</button>' +
+    (T.i === T.docs.length - 1 ? '<label class="ck"><input type="checkbox" id="confirma-trat"><span>Confirmo que sou ' + esc(T.signatario) + ', que li todos os documentos e que minhas dúvidas foram esclarecidas.</span></label>' : '') +
+    '<p class="nota">Assinatura eletrônica simples, desenhada na tela, registrada com data e horário.</p><div id="msg"></div><button class="btn" type="button" id="tr-ok">' + (T.i === T.docs.length - 1 ? 'Assinar e enviar todos' : 'Assinar e ir para o próximo') + '</button></div>';
+  return h;
+};
+TELAS.tratamento.depois = function () {
+  var T = G.trat, d = T.docs[T.i], r = T.resp[d.id];
+  G.sig.trat = null; criarPad('trat');
+  $('#limpa-trat').onclick = function () { G.sig.trat = null; criarPad('trat'); };
+  document.querySelectorAll('[data-tr]').forEach(function (el) { el.oninput = function () { r[el.dataset.tr] = el.value; }; });
+  document.querySelectorAll('[data-trc]').forEach(function (el) { el.onchange = function () { r[el.dataset.trc] = el.checked; }; });
+  $('#tr-ok').onclick = function () {
+    var p = [];
+    d.itens.forEach(function (it) { if (it.t === 'ck' && !r[it.k]) p.push('marcar: ' + it.l); if (it.t === 'f' && it.who === 'p' && it.req && !String(r[it.k] || '').trim()) p.push(it.l); });
+    if (!G.sig.trat) p.push('assinar');
+    var ultimo = T.i === T.docs.length - 1;
+    if (ultimo && !$('#confirma-trat').checked) p.push('marcar a confirmação final');
+    if (p.length) { $('#msg').innerHTML = '<div class="pend">Falta: ' + p.map(esc).join('; ') + '.</div>'; return; }
+    T.ass[d.id] = G.sig.trat;
+    if (!ultimo) { T.i++; render(); window.scrollTo(0, 0); return; }
+    var b = this; b.disabled = true; b.textContent = 'Enviando…';
+    chamar('apiTratamentoAssinar', T.token, { respostas: T.resp, assinaturas: T.ass, confirmacaoIdentidade: true, aparelho: navigator.userAgent })
+      .then(function (res) { G.protocolo = res.protocolo; G.tela = 'tratFinal'; render(); })
+      .catch(function (e) { b.disabled = false; b.textContent = 'Tentar enviar de novo'; mostrarErro(e, '#msg'); });
+  };
+};
+TELAS.tratFinal = function () {
+  return fala(['Documentos assinados! Obrigado.', 'Uma cópia fica guardada no seu prontuário. Se quiser uma via, peça à equipe.']) + '<div class="cartao"><span class="nota">Protocolo</span><div class="codigo">' + esc(G.protocolo) + '</div>' +
+    (G.modo === 'ipad' ? '<button class="btn" type="button" id="encerrar">Encerrar e devolver o iPad</button>' : '') + '</div>';
+};
+TELAS.tratFinal.depois = function () { var b = $('#encerrar'); if (b) b.onclick = reiniciar; if (G.modo === 'ipad') G.timerFinal = setTimeout(reiniciar, 60000); };
+
+TELAS.info = function () {
+  return fala('Sobre qual assunto você quer saber?') + '<div class="rapidas">' + G.T.informacoes.map(function (t, i) { return '<button class="rapida" type="button" data-inf="' + i + '">' + esc(t.titulo) + '</button>'; }).join('') +
+    '<button class="rapida" type="button" id="clinica">Tenho uma dúvida sobre o meu caso</button></div>';
+};
+TELAS.info.depois = function () {
+  document.querySelectorAll('[data-inf]').forEach(function (b) {
+    b.onclick = function () {
+      var t = G.T.informacoes[+b.dataset.inf];
+      $('#app').innerHTML = minhaFala(t.titulo) + fala([esc(t.texto), 'Para saber o que é indicado para você, só na avaliação com a Dra. Karolinne.']) +
+        '<div class="rapidas"><button class="rapida" type="button" id="o1">Ver outro assunto</button><button class="rapida" type="button" id="o2">Quero agendar uma consulta</button></div>';
+      $('#o1').onclick = function () { render(); }; $('#o2').onclick = function () { ir('agendar'); };
+    };
+  });
+  $('#clinica').onclick = function () {
+    $('#app').innerHTML = fala(esc(G.T.mensagens.clinico)) + '<div class="rapidas"><button class="rapida" type="button" id="o1">Pedir contato</button><button class="rapida" type="button" id="o2">Pedir agendamento</button></div>';
+    $('#o1').onclick = function () { ir('equipe'); }; $('#o2').onclick = function () { ir('agendar'); };
+  };
+};
+/* Agendamento em passos: uma pergunta por tela. */
+var MESES = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
+function partesHorario(iso) {
+  var d = new Date(iso), f = function (o) { return new Intl.DateTimeFormat('pt-BR', Object.assign({ timeZone: 'America/Sao_Paulo' }, o)).format(d); };
+  return { dia: f({ year: 'numeric', month: '2-digit', day: '2-digit' }), diaNum: f({ day: 'numeric' }), mes: MESES[Number(f({ month: 'numeric' })) - 1], hora: f({ hour: '2-digit', minute: '2-digit', hourCycle: 'h23' }) };
+}
+function fmtTel(t) { var d = String(t || '').replace(/\D/g, ''); return d.length === 11 ? '(' + d.slice(0, 2) + ') ' + d.slice(2, 7) + '-' + d.slice(7) : d.length === 10 ? '(' + d.slice(0, 2) + ') ' + d.slice(2, 6) + '-' + d.slice(6) : t; }
+function passo(n, total, titulo) { return '<div class="passo-rot">Passo ' + n + ' de ' + total + '</div>' + (titulo ? '<h2>' + esc(titulo) + '</h2>' : ''); }
+TELAS.agendar = function () {
+  G.ag = { hs: null };
+  return fala('Vamos marcar sua consulta. É rapidinho: uma pergunta de cada vez.') + '<div class="cartao">' + passo(1, 5, 'Qual sexta-feira é melhor para você?') + '<div id="dias" class="lista-grande"><span class="nota">Carregando a agenda…</span></div>' +
+    '<button class="btn leve" type="button" id="nenhum">Nenhum dia serve: entrar na lista de espera</button></div>';
+};
+TELAS.agendar.depois = function () {
+  $('#nenhum').onclick = function () { ir('espera'); };
+  chamar('apiHorarios').then(function (hs) {
+    G.ag.hs = hs; var dias = [];
+    hs.forEach(function (h) { var p = partesHorario(h.inicio); var d = dias.filter(function (x) { return x.dia === p.dia; })[0]; if (!d) dias.push(d = { dia: p.dia, rot: 'Sexta, ' + p.diaNum + ' de ' + p.mes, n: 0 }); d.n++; });
+    $('#dias').innerHTML = dias.length ? dias.slice(0, 4).map(function (d) { return '<button class="dia" type="button" data-dia="' + esc(d.dia) + '">' + esc(d.rot) + '<small>' + d.n + (d.n === 1 ? ' horário livre' : ' horários livres') + '</small></button>'; }).join('')
+      : '<p>Não há horários livres nas próximas semanas. Toque em <b>Falar com a equipe</b> que combinamos com você.</p>';
+    document.querySelectorAll('[data-dia]').forEach(function (b) { b.onclick = function () { G.ag.dia = b.dataset.dia; G.ag.diaRot = b.childNodes[0].textContent; ir('agHora'); }; });
+  }).catch(function () { $('#dias').innerHTML = '<p class="erro">Não consegui carregar a agenda agora. Tente de novo em instantes ou fale com a equipe.</p>'; });
+};
+TELAS.agHora = function () {
+  var hs = (G.ag.hs || []).filter(function (h) { return partesHorario(h.inicio).dia === G.ag.dia; });
+  return '<div class="cartao">' + passo(2, 5, 'Qual horário?') + '<p>' + esc(G.ag.diaRot) + '</p><div class="horas">' +
+    hs.map(function (h) { return '<button class="hora" type="button" data-h="' + esc(h.inicio) + '">' + esc(partesHorario(h.inicio).hora) + '</button>'; }).join('') + '</div></div>';
+};
+TELAS.agHora.depois = function () { document.querySelectorAll('[data-h]').forEach(function (b) { b.onclick = function () { G.ag.inicio = b.dataset.h; G.ag.hora = b.textContent; ir('agMotivo'); }; }); };
+TELAS.agMotivo = function () {
+  return '<div class="cartao">' + passo(3, 5, 'Qual o motivo da consulta?') + '<div class="lista-grande">' +
+    G.T.motivosAgendamento.map(function (m) { return '<button class="dia" type="button" data-mot="' + esc(m) + '">' + esc(m) + '</button>'; }).join('') + '</div></div>';
+};
+TELAS.agMotivo.depois = function () { document.querySelectorAll('[data-mot]').forEach(function (b) { b.onclick = function () { G.ag.motivo = b.dataset.mot; ir('agDados'); }; }); };
+TELAS.agDados = function () {
+  return '<div class="cartao">' + passo(4, 5, 'Seu nome e telefone') +
+    '<label class="campo">Nome completo<input type="text" id="f-nome" autocomplete="name" value="' + esc(G.ag.nome || '') + '"></label>' +
+    '<label class="campo">Telefone com DDD (WhatsApp)<input type="tel" id="f-tel" autocomplete="tel" placeholder="(21) 99999-9999" value="' + esc(G.ag.tel || '') + '"></label>' +
+    '<div class="campo"><span>Como você conheceu a clínica? (opcional)</span><div class="rapidas">' + (G.cfg.origens || []).map(function (o) { return '<button type="button" class="chip" data-or="' + esc(o) + '" aria-pressed="' + (G.ag.origem === o) + '">' + esc(o) + '</button>'; }).join('') + '</div></div>' +
+    '<div id="msg"></div><button class="btn" type="button" id="f-ok">Continuar</button></div>';
+};
+TELAS.agDados.depois = function () {
+  document.querySelectorAll('[data-or]').forEach(function (b) { b.onclick = function () { G.ag.origem = b.dataset.or; document.querySelectorAll('[data-or]').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); }); }; });
+  $('#f-ok').onclick = function () {
+    var n = $('#f-nome').value.trim(), t = $('#f-tel').value.trim();
+    if (n.split(/\s+/).length < 2) { mostrarErro({ msg: 'Escreva seu nome completo (nome e sobrenome).' }, '#msg'); return; }
+    if (t.replace(/\D/g, '').length < 10) { mostrarErro({ msg: 'Escreva o telefone com DDD. Exemplo: (21) 99999-9999.' }, '#msg'); return; }
+    G.ag.nome = n; G.ag.tel = t; ir('agNasc');
+  };
+};
+TELAS.agNasc = function () {
+  return '<div class="cartao">' + passo(5, 5, 'Sua data de nascimento') + '<p class="nota">Com ela e o seu telefone você encontra sua consulta depois, sem precisar de código.</p>' +
+    campoDataHTML('f-nasc', 'Data de nascimento', G.ag.nasc) +
+    '<label class="campo">E-mail para receber o lembrete (opcional)<input type="email" id="f-email" autocomplete="email" value="' + esc(G.ag.email || '') + '"></label>' +
+    '<div id="msg"></div><button class="btn" type="button" id="f-ok">Continuar</button></div>';
+};
+TELAS.agNasc.depois = function () {
+  $('#f-ok').onclick = function () {
+    var d = $('#f-nasc').value, e = $('#f-email').value.trim();
+    if (!d || isNaN(idade(d)) || idade(d) < 0 || idade(d) > 120) { mostrarErro({ msg: 'Confira a data: dia, mês e ano com 4 números. Exemplo: 05 / 08 / 1975.' }, '#msg'); return; }
+    if (e && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(e)) { mostrarErro({ msg: 'Confira o e-mail ou deixe em branco.' }, '#msg'); return; }
+    G.ag.nasc = d; G.ag.email = e; ir('agResumo');
+  };
+};
+TELAS.agResumo = function () {
+  var auto = G.cfg.modoAgenda === 'automatico', p = G.ag.nasc.split('-');
+  return fala('Confira se está tudo certo:') + '<div class="cartao"><div class="resumo">' +
+    '<div><b>' + esc(G.ag.diaRot) + ', às ' + esc(G.ag.hora) + '</b></div><div>' + esc(G.ag.motivo) + '</div><div>' + esc(G.ag.nome) + '</div><div>' + esc(fmtTel(G.ag.tel)) + ' · nascimento ' + esc(p[2] + '/' + p[1] + '/' + p[0]) + '</div></div>' +
+    '<div id="msg"></div><button class="btn" type="button" id="f-ok">' + (auto ? 'Confirmar agendamento' : 'Enviar pedido de agendamento') + '</button>' +
+    '<button class="btn leve" type="button" id="mudar">Quero mudar algo</button></div>';
+};
+TELAS.agResumo.depois = function () {
+  $('#mudar').onclick = function () { ir('agendar'); };
+  $('#f-ok').onclick = function () {
+    var b = this; b.disabled = true; b.textContent = 'Enviando…';
+    chamar('apiAgendar', { nome: G.ag.nome, telefone: G.ag.tel, nascimento: G.ag.nasc, email: G.ag.email, motivo: G.ag.motivo, inicio: G.ag.inicio, origemPaciente: G.ag.origem || '' })
+      .then(function (r) {
+        var confirmada = r.status === 'confirmada'; G.pilha = [];
+        $('#app').innerHTML = fala([confirmada ? 'Consulta marcada para <b>' + esc(r.rotulo) + '</b>! ✅' : 'Pedido registrado' + (r.rotulo ? ' para <b>' + esc(r.rotulo) + '</b>' : '') + '. A equipe vai confirmar com você pelo WhatsApp. Ainda não é a confirmação.' + (r.conflito ? ' Outra pessoa também pediu esse horário.' : ''),
+          'Para confirmar presença, remarcar ou cancelar (até ' + G.cfg.prazoAlteracao + ' h antes), toque em <b>"Já tenho consulta agendada"</b> e informe <b>seu telefone e sua data de nascimento</b>. Não precisa anotar código.',
+          '<b>Orientações</b><br>' + G.T.orientacoes.map(esc).join('<br>')]) +
+          '<div class="principais"><button class="grande" type="button" id="o1">Preencher meu cadastro agora<small>Assim você ganha tempo no dia da consulta</small></button><button class="grande claro" type="button" id="o2">Voltar ao início</button></div>';
+        $('#o1').onclick = function () { ir('boasvindas'); }; $('#o2').onclick = function () { ir('inicio'); };
+      }).catch(function (e) {
+        b.disabled = false; b.textContent = 'Tentar de novo';
+        if (e.codigo === 'HORARIO_INDISPONIVEL') { $('#msg').innerHTML = '<p class="erro">Esse horário acabou de ser ocupado por outra pessoa. Toque em "Quero mudar algo" para escolher outro.</p>'; return; }
+        mostrarErro(e, '#msg');
+      });
+  };
+};
+
+/* Página da clínica (link da bio do Instagram): agendamento, WhatsApp e como chegar. */
+var ICONES = {"cal": "<svg width=\"28\" height=\"28\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><rect x=\"3.5\" y=\"5\" width=\"17\" height=\"15\" rx=\"3\"/><path d=\"M8 3v4M16 3v4M3.5 10h17\"/></svg>", "pin": "<svg width=\"28\" height=\"28\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z\"/><circle cx=\"12\" cy=\"9.5\" r=\"2.6\"/></svg>", "wa": "<svg width=\"28\" height=\"28\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 20l1.3-3.9A8 8 0 1 1 8 19z\"/><path d=\"M9.2 8.6c.2-.5.6-.5.9-.5h.5c.2 0 .4.1.5.4l.6 1.5c.1.2 0 .5-.1.6l-.5.6c.6 1.1 1.4 1.9 2.5 2.5l.6-.5c.2-.2.4-.2.6-.1l1.5.6c.3.1.4.3.4.5v.5c0 .3-.1.7-.5.9-.6.3-1.4.4-2.3 0-1.9-.8-3.5-2.4-4.3-4.3-.4-.9-.3-1.7 0-2.3z\"/></svg>", "google": "<svg width=\"28\" height=\"28\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M12 3.5l2.6 5.3 5.8.8-4.2 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.2-4.1 5.8-.8z\"/></svg>", "seta": "<svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M9 6l6 6-6 6\"/></svg>"};
+TELAS.clinica = function () {
+  var tel = String(G.cfg.telefone || '').replace(/\D/g, ''), wa = 'https://wa.me/55' + tel, mapa = 'https://www.google.com/maps/dir/?api=1&destination=' + encodeURIComponent(G.cfg.mapaDestino || G.cfg.endereco || '') + (G.cfg.mapaPlaceId ? '&destination_place_id=' + encodeURIComponent(G.cfg.mapaPlaceId) : '');
+  var card = function (tag, attrs, ic, tit, txt) { return '<' + tag + ' class="bio-card" ' + attrs + '><span class="ic">' + ICONES[ic] + '</span><span><b>' + tit + '</b><small>' + txt + '</small></span><span class="seta">' + ICONES.seta + '</span></' + tag + '>'; };
+  return '<div class="bio-cab">' + (G.cfg.logo ? '<img src="' + G.cfg.logo + '" alt="Karolinne Almeida Odontologia">' : '') +
+    '<div class="bio-nome">Karolinne Almeida</div><div class="bio-sub">ODONTOLOGIA</div><div class="bio-div">— ✦ —</div>' +
+    '<div class="bio-frase">Cuidando do seu sorriso com atenção, delicadeza e tratamentos pensados para a sua saúde e a sua autoestima.</div>' +
+    '<div class="bio-icones"><a href="' + esc(wa) + '" target="_blank" rel="noopener" aria-label="WhatsApp">' + ICONES.wa + '</a><a href="' + esc(mapa) + '" target="_blank" rel="noopener" aria-label="Como chegar">' + ICONES.pin + '</a>' + ((G.cfg.googlePerfil || G.cfg.googleAvaliacao) ? '<a href="' + esc((G.cfg.googlePerfil || G.cfg.googleAvaliacao)) + '" target="_blank" rel="noopener" aria-label="Perfil no Google">' + ICONES.google + '</a>' : '') + '</div></div>' +
+    card('button', 'type="button" data-ir="agendar"', 'cal', 'Agendamento', 'Agende sua avaliação em poucos passos, escolhendo o dia e o horário.') +
+    card('a', 'href="' + esc(wa) + '" target="_blank" rel="noopener"', 'wa', 'Fale conosco', 'Tire suas dúvidas com a nossa equipe pelo WhatsApp, quando for melhor para você.') +
+    ((G.cfg.googlePerfil || G.cfg.googleAvaliacao) ? card('a', 'href="' + esc((G.cfg.googlePerfil || G.cfg.googleAvaliacao)) + '" target="_blank" rel="noopener"', 'google', 'Google', 'Veja nosso perfil no Google: fotos, localização e avaliações de pacientes.') : '') +
+    card('a', 'href="' + esc(mapa) + '" target="_blank" rel="noopener"', 'pin', 'Como chegar', esc(G.cfg.endereco || '')) +
+    '<div class="bio-rod">' + esc(G.cfg.profissional) + ' · ' + esc(G.cfg.cro) + '<br>© ' + new Date().getFullYear() + ' Karolinne Almeida Odontologia</div>';
+};
+TELAS.clinica.depois = function () { document.querySelectorAll('[data-ir]').forEach(function (b) { b.onclick = function () { ir(b.dataset.ir); }; }); };
+
+/* Orientações após procedimentos (link enviado pelo WhatsApp: ?ir=orientacoes&t=faceta) */
+var FIO_SVG = '<svg viewBox="0 0 600 226" role="img" aria-label="Como usar o fio dental: 1 passe o fio entre os dentes, 2 suba até a gengiva e limpe, 3 deslize o fio para a frente sem descer">' +
+  [0, 1, 2].map(function (i) {
+    var x = i * 200, dente = function (dx) { return '<path d="M' + (x + dx) + ' 40 h52 a6 6 0 0 1 6 6 v92 q0 18 -18 22 h-34 q-12 -4 -12 -22 v-92 a6 6 0 0 1 6 -6z" fill="#FFFDF8" stroke="#C5A575" stroke-width="2"/>'; };
+    var gengiva = '<path d="M' + (x + 20) + ' 34 q40 -22 80 0 q40 -22 80 0 v16 q-40 -14 -80 0 q-40 -14 -80 0z" fill="#E8B7A8"/>';
+    var fio = i === 0 ? '<path d="M' + (x + 100) + ' 175 v-40" stroke="#765442" stroke-width="3"/><path d="M' + (x + 92) + ' 145 l8 -12 l8 12" fill="none" stroke="#B98258" stroke-width="3"/>'
+      : i === 1 ? '<path d="M' + (x + 100) + ' 150 v-95" stroke="#765442" stroke-width="3"/><path d="M' + (x + 92) + ' 70 l8 -12 l8 12" fill="none" stroke="#B98258" stroke-width="3"/>'
+      : '<path d="M' + (x + 100) + ' 60 q0 40 60 52" stroke="#765442" stroke-width="3" fill="none"/><path d="M' + (x + 150) + ' 104 l12 8 l-12 8" fill="none" stroke="#B98258" stroke-width="3"/>';
+    var rot = [['1. Passe o fio', 'entre os dentes'], ['2. Suba até a gengiva', 'e limpe'], ['3. Deslize para a frente,', 'sem descer']][i];
+    var txt = function (l, y) { return '<text x="' + (x + 100) + '" y="' + y + '" text-anchor="middle" font-family="Montserrat, Arial" font-size="13" fill="#3A2A21">' + l + '</text>'; };
+    return gengiva + dente(42) + dente(102) + fio + txt(rot[0], 198) + txt(rot[1], 216);
+  }).join('') + '</svg>';
+TELAS.orientacoes = function () {
+  var o = (G.T.orientacoesPos || {})[G.orientT];
+  if (!o) return fala('Não encontrei essas orientações. Fale com a equipe: ' + esc(G.cfg.telefone) + '.');
+  return fala('Aqui estão os seus cuidados. Leia com calma e guarde este link. 💛') + '<div class="cartao"><h2>' + esc(o.titulo) + '</h2><ul class="orient">' + o.itens.map(function (i) { return '<li>' + esc(i) + '</li>'; }).join('') + '</ul>' +
+    (o.fio ? '<div class="fio-fig"><b>Como passar o fio dental</b>' + FIO_SVG + '</div>' : '') +
+    '<p class="nota">Estas orientações são gerais e não substituem o que a Dra. Karolinne combinou com você. Em caso de dor forte, sangramento que não para, febre ou inchaço que aumenta, fale com a equipe: ' + esc(G.cfg.telefone) + '.</p></div>';
+};
+
+/* Link curto da avaliação no Google */
+TELAS.google = function () {
+  return fala('Obrigada por querer avaliar a Karolinne Almeida Odontologia! 💛') + '<div class="cartao"><p>Toque no botão abaixo. No Google, toque em <b>"Escrever uma avaliação"</b>, escolha as estrelas e, se quiser, escreva um comentário.</p>' +
+    (G.cfg.googleAvaliacao ? '<a class="btn" style="text-align:center;text-decoration:none;display:block" href="' + esc(G.cfg.googleAvaliacao) + '" target="_blank" rel="noopener">Abrir a clínica no Google</a>' : '<p class="nota">O link do Google ainda não foi configurado.</p>') +
+    '<p class="nota">É opcional e não há nenhuma recompensa: queremos apenas a sua opinião sincera.</p></div>';
+};
+
+/* Lista de espera */
+TELAS.espera = function () {
+  return fala('Sem problema! Deixe seu nome e telefone que avisamos você assim que abrir um horário.') + '<div class="cartao"><h2>Lista de espera</h2>' +
+    '<label class="campo">Nome completo<input type="text" id="w-nome" autocomplete="name"></label>' +
+    '<label class="campo">Telefone com DDD (WhatsApp)<input type="tel" id="w-tel" autocomplete="tel" placeholder="(21) 99999-9999"></label>' +
+    '<label class="campo">Melhor período para você (opcional)<input type="text" id="w-pref" maxlength="150" placeholder="Ex.: sextas de manhã"></label>' +
+    '<div id="msg"></div><button class="btn" type="button" id="w-ok">Entrar na lista de espera</button><button class="btn leve" type="button" id="w-eq">Prefiro falar com a equipe</button></div>';
+};
+TELAS.espera.depois = function () {
+  $('#w-eq').onclick = function () { ir('equipe'); };
+  $('#w-ok').onclick = function () {
+    var b = this; b.disabled = true;
+    chamar('apiEspera', { nome: $('#w-nome').value, telefone: $('#w-tel').value, preferencia: $('#w-pref').value }).then(function () {
+      G.pilha = []; $('#app').innerHTML = fala('Pronto! Você está na lista de espera. Assim que abrir um horário, a equipe avisa você pelo WhatsApp. 😊') + '<button class="btn sec" type="button" id="vi">Voltar ao início</button>'; $('#vi').onclick = function () { ir('inicio'); };
+    }).catch(function (e) { b.disabled = false; mostrarErro(e, '#msg'); });
+  };
+};
+
+/* Pesquisa de satisfação (anônima). O convite para avaliar no Google aparece para todos, qualquer que seja a nota. */
+TELAS.pesquisa = function () {
+  var rot = ['Ruim', 'Regular', 'Boa', 'Muito boa', 'Excelente'];
+  return fala('Que bom ter você por aqui! Como foi sua experiência na Karolinne Almeida Odontologia?') + '<div class="cartao"><h2>Sua opinião</h2>' +
+    '<div class="campo"><span>De 1 a 5, como você avalia o atendimento?</span><div class="notas" role="group" aria-label="Nota">' +
+    [1, 2, 3, 4, 5].map(function (n) { return '<button type="button" class="nota-bt" data-nota="' + n + '" aria-pressed="false">' + '<span>★</span><span style="font-size:20px">' + n + '</span><small>' + rot[n - 1] + '</small></button>'; }).join('') + '</div></div>' +
+    '<div class="campo"><span>Você indicaria a clínica para alguém? (opcional)</span><div class="rapidas"><button type="button" class="chip" data-rec="Sim" aria-pressed="false">Sim</button><button type="button" class="chip" data-rec="Talvez" aria-pressed="false">Talvez</button><button type="button" class="chip" data-rec="Não" aria-pressed="false">Não</button></div></div>' +
+    '<label class="campo">Quer deixar um comentário? (opcional, sem informações de saúde)<textarea id="q-com" maxlength="600"></textarea></label>' +
+    '<div id="msg"></div><button class="btn" type="button" id="q-ok">Enviar minha opinião</button><p class="nota">A pesquisa é anônima: não pedimos seu nome.</p></div>';
+};
+TELAS.pesquisa.depois = function () {
+  var nota = 0, rec = '';
+  document.querySelectorAll('[data-nota]').forEach(function (b) { b.onclick = function () { nota = Number(b.dataset.nota); document.querySelectorAll('[data-nota]').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); }); }; });
+  document.querySelectorAll('[data-rec]').forEach(function (b) { b.onclick = function () { rec = b.dataset.rec; document.querySelectorAll('[data-rec]').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); }); }; });
+  $('#q-ok').onclick = function () {
+    if (!nota) { mostrarErro({ msg: 'Escolha uma nota de 1 a 5.' }, '#msg'); return; }
+    var b = this; b.disabled = true;
+    chamar('apiPesquisa', { nota: nota, recomendaria: rec, comentario: $('#q-com').value }).then(function (r) {
+      G.pilha = [];
+      $('#app').innerHTML = fala('Muito obrigada pela sua opinião! Ela nos ajuda a cuidar cada vez melhor de você. 💛') +
+        (r.google ? '<div class="cartao"><p>Se puder, conte também no Google como foi sua experiência. Isso ajuda outras pessoas a conhecer a clínica.</p><a class="btn" style="text-align:center;text-decoration:none;display:block" href="' + esc(r.google) + '" target="_blank" rel="noopener">Avaliar no Google</a><p class="nota">É opcional e não há nenhuma recompensa: queremos apenas a sua opinião sincera.</p></div>' : '') +
+        '<button class="btn sec" type="button" id="vi">Voltar ao início</button>';
+      $('#vi').onclick = function () { ir('inicio'); };
+    }).catch(function (e) { b.disabled = false; mostrarErro(e, '#msg'); });
+  };
+};
+
+/* ---------- Salvamento automático e conexão ---------- */
+var salvarTimer = null;
+function salvarAuto() {
+  if (!G.token || ['identificacao', 'anamnese', 'revisao', 'documentos', 'assinatura'].indexOf(G.tela) < 0) return;
+  clearTimeout(salvarTimer);
+  salvarTimer = setTimeout(function () {
+    chamar('apiSalvar', G.token, G.tela, G.dados).then(function () { $('#faixa').hidden = true; }).catch(function (e) {
+      if (e.codigo === 'CONEXAO') $('#faixa').hidden = false;
+      else if (e.codigo === 'SESSAO_EXPIRADA' || e.codigo === 'SESSAO_INVALIDA') { limparLocal(); G.token = ''; $('#app').innerHTML = fala(esc(e.msg)) + '<button class="btn" type="button" id="vi">Começar de novo</button>'; $('#vi').onclick = reiniciar; }
+    });
+  }, 1200);
+}
+window.addEventListener('online', function () { $('#faixa').hidden = true; salvarAuto(); });
+window.addEventListener('offline', function () { $('#faixa').hidden = false; });
+
+/* ---------- iPad da recepção: encerramento por inatividade ---------- */
+var inativo = null;
+function vigiar() {
+  if (G.modo !== 'ipad') return;
+  clearTimeout(inativo);
+  inativo = setTimeout(function () {
+    if (G.tela === 'inicio') return;
+    $('#modal').innerHTML = '<div class="cartao">' + fala('Ainda está aí? Para proteger seus dados, vou encerrar esta sessão em 60 segundos.') + '<button class="btn" type="button" id="sigo">Continuar preenchendo</button></div>';
+    $('#modal').hidden = false;
+    var fim = setTimeout(reiniciar, 60000);
+    $('#sigo').onclick = function () { clearTimeout(fim); $('#modal').hidden = true; vigiar(); };
+  }, 8 * 60000);
+}
+['pointerdown', 'keydown'].forEach(function (ev) { document.addEventListener(ev, vigiar, { passive: true }); });
+
+/* ---------- Início ---------- */
+G.tela = 'carregando'; render();
+function lerLocal(cb) {
+  if (window.API_URL) { var q = {}; new URLSearchParams(location.search).forEach(function (v, k) { q[k] = v; }); return cb({ parameter: q }); }
+  google.script.url.getLocation(cb);
+}
+lerLocal(function (loc) {
+  var p = (loc && loc.parameter) || {};
+  G.modo = p.modo === 'ipad' ? 'ipad' : 'link';
+  G.convite = p.convite || ''; G.orientT = p.t || '';
+  chamar('apiConfig').then(function (cfg) {
+    G.cfg = cfg; G.T = cfg.textos;
+    if (cfg.logo) { $('#logo').src = cfg.logo; $('#logo').hidden = false; $('#marca-texto').hidden = true; }
+    var salvo = null; try { salvo = JSON.parse(sessionStorage.getItem(CHAVE) || 'null'); } catch (e) {}
+    if (p.assinar) {
+      chamar('apiTratamentoAbrir', p.assinar).then(function (t) {
+        G.trat = { token: p.assinar, docs: t.docs, campos: t.campos, plano: t.plano || [], resp: {}, ass: {}, i: 0, signatario: t.paciente.nome };
+        G.tela = 'tratamento'; render();
+      }).catch(function (e) { $('#app').innerHTML = fala('<span class="erro">' + esc(e.msg) + '</span>'); });
+      vigiar(); return;
+    }
+    // Atalhos do link (?ir=agendar, consulta, documentos, info, equipe, novo): abrem direto a tela certa; "Voltar" leva ao menu.
+    var ATALHOS = { orientacoes: 'orientacoes', clinica: 'clinica', google: 'google', pesquisa: 'pesquisa', espera: 'espera', agendar: 'agendar', consulta: 'minhaConsulta', documentos: 'documentosMenu', info: 'info', equipe: 'equipe', novo: 'boasvindas' };
+    var alvo = !G.convite && ATALHOS[p.ir];
+    if (salvo && salvo.token) { G.token = salvo.token; G.codigo = salvo.codigo; G.dados = salvo.dados; G.qi = salvo.qi || 0; G.tela = salvo.tela || 'identificacao'; }
+    if (alvo && !(p.ir === 'documentos' && G.token)) { G.pilha = ['inicio']; G.tela = alvo; }
+    else if (!(salvo && salvo.token)) G.tela = G.convite ? 'boasvindas' : 'inicio';
+    render();
+    vigiar();
+  }).catch(function (e) { $('#app').innerHTML = fala('<span class="erro">' + esc(e.msg) + '</span>'); });
+});
+</script>
+</body>
+</html>
