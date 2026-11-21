@@ -96,6 +96,8 @@ body.bio main{padding-top:28px;padding-bottom:40px;gap:16px;max-width:520px}
 .bio-card b{display:block;font-family:var(--titulo);font-size:22px;letter-spacing:.06em;color:var(--marrom);font-weight:600;text-transform:uppercase}
 .bio-card small{display:block;color:var(--suave);font-size:14px;line-height:1.4}
 .bio-card .seta{width:36px;height:36px;border-radius:50%;background:var(--off);display:grid;place-items:center;color:var(--marrom)}
+.aviso-gov{background:#FBF3EC;border:1px solid var(--caramelo);border-radius:14px;padding:12px 14px;margin:10px 0;font-size:16px}
+ol.passos{padding-left:22px;margin:6px 0 12px}ol.passos li{margin:6px 0}
 .bio-rod{text-align:center;color:var(--suave);font-size:12px;margin-top:10px}
 .orient li{margin:0 0 10px;font-size:17px}
 .fio-fig{background:var(--off);border:1px solid var(--bege);border-radius:16px;padding:10px}
@@ -231,7 +233,10 @@ $('#b-voltar').addEventListener('click', function () {
   if (G.tela === 'final') return;
   var t = G.pilha.pop(); if (t) { G.tela = t; render(); window.scrollTo(0, 0); }
 });
-$('#b-equipe').addEventListener('click', function () { ir('equipe'); });
+// "Falar com a equipe": no celular abre o WhatsApp da clínica (mensagem neutra, sem dados de saúde); no iPad da recepção, o recado.
+function linkWhatsEquipe() { return 'https://wa.me/55' + String((G.cfg && G.cfg.telefone) || '').replace(/\D/g, '') + '?text=' + encodeURIComponent('Olá! Vim pela Claudinha e gostaria de falar com a equipe.'); }
+function abrirWhats() { var a = document.createElement('a'); a.href = linkWhatsEquipe(); a.target = '_blank'; a.rel = 'noopener'; document.body.appendChild(a); a.click(); a.remove(); }
+$('#b-equipe').addEventListener('click', function () { if (G.modo === 'ipad' || !G.cfg) ir('equipe'); else abrirWhats(); });
 
 /* ---------- Telas ---------- */
 var TELAS = {};
@@ -628,6 +633,7 @@ TELAS.antigo = function () { return fala(esc(G.T.mensagens.pacienteAntigo)) + fo
 TELAS.antigo.depois = function () { ligarContato('Atualização de cadastro (paciente da clínica)', 'Pronto! A equipe vai enviar seu link pessoal de atualização pelo WhatsApp. Ele vale por 72 horas.'); };
 TELAS.equipe = function () {
   return fala(esc(G.T.mensagens.equipe) + '<br>Telefone da clínica: <b>' + esc(G.cfg.telefone) + '</b>') +
+    (G.modo === 'ipad' ? '' : '<a class="btn" id="eq-wa" href="' + esc(linkWhatsEquipe()) + '" target="_blank" rel="noopener" style="display:block;text-align:center;text-decoration:none;margin-bottom:14px">Conversar pelo WhatsApp</a><p class="nota" style="text-align:center;margin-top:-6px">Ou deixe um recado e a equipe chama você:</p>') +
     formContato('Falar com a equipe', '<label class="campo">Assunto (sem informações de saúde)<input type="text" id="f-assunto" maxlength="200"></label>', 'Enviar pedido de contato');
 };
 TELAS.equipe.depois = function () { ligarContato(null, 'Recebido! A equipe vai entrar em contato com você.'); };
@@ -723,33 +729,70 @@ TELAS.tratamento = function () {
     if (it.t === 'f' && it.who === 'p') h += '<label class="campo">' + esc(it.l) + (it.req ? ' <span class="obr">*</span>' : '') + '<textarea data-tr="' + it.k + '">' + esc(r[it.k]) + '</textarea></label>';
     if (it.t === 'ck') h += '<label class="ck"><input type="checkbox" data-trc="' + it.k + '"' + (r[it.k] ? ' checked' : '') + '><span>' + esc(it.l) + '</span></label>';
   });
-  h += '<span class="nota">Assinatura de ' + esc(T.signatario) + '</span><canvas class="pad" id="pad-trat" aria-label="Quadro de assinatura"></canvas><button class="btn leve" type="button" id="limpa-trat">Limpar assinatura</button>' +
+  var viaGov = T.govbr && d.id === '05';
+  h += (viaGov ? '<div class="aviso-gov"><b>Este contrato será assinado pelo gov.br</b>, no próximo passo, com a sua conta gov.br (nível prata ou ouro). Aqui você só lê e marca as confirmações.</div>'
+    : '<span class="nota">Assinatura de ' + esc(T.signatario) + '</span><canvas class="pad" id="pad-trat" aria-label="Quadro de assinatura"></canvas><button class="btn leve" type="button" id="limpa-trat">Limpar assinatura</button>') +
     (T.i === T.docs.length - 1 ? '<label class="ck"><input type="checkbox" id="confirma-trat"><span>Confirmo que sou ' + esc(T.signatario) + ', que li todos os documentos e que minhas dúvidas foram esclarecidas.</span></label>' : '') +
     '<p class="nota">Assinatura eletrônica simples, desenhada na tela, registrada com data e horário.</p><div id="msg"></div><button class="btn" type="button" id="tr-ok">' + (T.i === T.docs.length - 1 ? 'Assinar e enviar todos' : 'Assinar e ir para o próximo') + '</button></div>';
   return h;
 };
 TELAS.tratamento.depois = function () {
   var T = G.trat, d = T.docs[T.i], r = T.resp[d.id];
-  G.sig.trat = null; criarPad('trat');
-  $('#limpa-trat').onclick = function () { G.sig.trat = null; criarPad('trat'); };
+  var viaGov = T.govbr && d.id === '05';
+  G.sig.trat = null; if (!viaGov) { criarPad('trat'); $('#limpa-trat').onclick = function () { G.sig.trat = null; criarPad('trat'); }; }
   document.querySelectorAll('[data-tr]').forEach(function (el) { el.oninput = function () { r[el.dataset.tr] = el.value; }; });
   document.querySelectorAll('[data-trc]').forEach(function (el) { el.onchange = function () { r[el.dataset.trc] = el.checked; }; });
   $('#tr-ok').onclick = function () {
     var p = [];
     d.itens.forEach(function (it) { if (it.t === 'ck' && !r[it.k]) p.push('marcar: ' + it.l); if (it.t === 'f' && it.who === 'p' && it.req && !String(r[it.k] || '').trim()) p.push(it.l); });
-    if (!G.sig.trat) p.push('assinar');
+    if (!G.sig.trat && !viaGov) p.push('assinar');
     var ultimo = T.i === T.docs.length - 1;
     if (ultimo && !$('#confirma-trat').checked) p.push('marcar a confirmação final');
     if (p.length) { $('#msg').innerHTML = '<div class="pend">Falta: ' + p.map(esc).join('; ') + '.</div>'; return; }
-    T.ass[d.id] = G.sig.trat;
+    if (!viaGov) T.ass[d.id] = G.sig.trat;
     if (!ultimo) { T.i++; render(); window.scrollTo(0, 0); return; }
     var b = this; b.disabled = true; b.textContent = 'Enviando…';
     chamar('apiTratamentoAssinar', T.token, { respostas: T.resp, assinaturas: T.ass, confirmacaoIdentidade: true, aparelho: navigator.userAgent })
-      .then(function (res) { G.protocolo = res.protocolo; G.tela = 'tratFinal'; render(); })
+      .then(function (res) { G.protocolo = res.protocolo; G.tela = res.govbr ? 'tratGovbr' : 'tratFinal'; render(); window.scrollTo(0, 0); })
       .catch(function (e) { b.disabled = false; b.textContent = 'Tentar enviar de novo'; mostrarErro(e, '#msg'); });
   };
 };
+/* Contrato pelo gov.br: baixar o PDF, assinar no assinador oficial e devolver o arquivo assinado */
+TELAS.tratGovbr = function () {
+  return fala(['Falta só o contrato.', 'Ele é assinado pelo <b>gov.br</b>, a assinatura oficial do governo. Leva uns 3 minutos.']) +
+    '<div class="cartao"><span class="cat">Passo 1</span><h2>Baixe o contrato</h2><button class="btn" type="button" id="gv-baixar">Baixar o contrato (PDF)</button><div id="gv-link"></div></div>' +
+    '<div class="cartao"><span class="cat">Passo 2</span><h2>Assine no gov.br</h2><ol class="passos"><li>Toque em <b>Abrir o assinador do gov.br</b> e entre com a sua conta gov.br (nível <b>prata ou ouro</b>).</li><li>Escolha o arquivo do contrato que você baixou.</li><li>Toque no lugar da assinatura, depois em <b>Assinar</b>, e confirme com o código que chega no seu celular.</li><li>Baixe o <b>arquivo assinado</b>.</li></ol>' +
+    '<a class="btn sec" href="https://assinador.iti.br" target="_blank" rel="noopener" style="display:block;text-align:center;text-decoration:none">Abrir o assinador do gov.br</a></div>' +
+    '<div class="cartao"><span class="cat">Passo 3</span><h2>Envie o contrato assinado</h2><input type="file" id="gv-arq" accept="application/pdf"><div id="msg"></div><button class="btn" type="button" id="gv-enviar">Enviar contrato assinado</button>' +
+    '<p class="nota">Não tem conta gov.br prata ou ouro? Fale com a equipe: dá para assinar na clínica.</p></div>';
+};
+TELAS.tratGovbr.depois = function () {
+  var T = G.trat;
+  $('#gv-baixar').onclick = function () {
+    var b = this; b.disabled = true; b.textContent = 'Preparando…';
+    chamar('apiTratamentoGovbrPdf', T.token).then(function (u) {
+      b.disabled = false; b.textContent = 'Baixar de novo';
+      var a = document.createElement('a'); a.href = u; a.download = 'contrato-karolinne-almeida.pdf'; a.textContent = 'Se não baixou, toque aqui para abrir o contrato'; a.className = 'nota';
+      $('#gv-link').innerHTML = ''; $('#gv-link').appendChild(a); a.click();
+    }).catch(function (e) { b.disabled = false; b.textContent = 'Tentar de novo'; mostrarErro(e, '#gv-link'); });
+  };
+  $('#gv-enviar').onclick = function () {
+    var f = $('#gv-arq').files && $('#gv-arq').files[0], b = this;
+    if (!f) { $('#msg').innerHTML = '<div class="pend">Escolha o arquivo do contrato assinado.</div>'; return; }
+    if (f.size > 10 * 1024 * 1024) { $('#msg').innerHTML = '<div class="pend">O arquivo passa de 10 MB.</div>'; return; }
+    b.disabled = true; b.textContent = 'Enviando…';
+    var fr = new FileReader();
+    fr.onload = function () {
+      var u = String(fr.result).replace(/^data:[^;]*;/, 'data:application/pdf;');
+      chamar('apiTratamentoGovbrEnviar', T.token, u).then(function (r) { G.protocolo = r.protocolo; G.govbrEnviado = true; G.tela = 'tratFinal'; render(); window.scrollTo(0, 0); })
+        .catch(function (e) { b.disabled = false; b.textContent = 'Tentar enviar de novo'; mostrarErro(e, '#msg'); });
+    };
+    fr.onerror = function () { b.disabled = false; b.textContent = 'Tentar enviar de novo'; $('#msg').innerHTML = '<div class="pend">Não consegui ler o arquivo.</div>'; };
+    fr.readAsDataURL(f);
+  };
+};
 TELAS.tratFinal = function () {
+  if (G.govbrEnviado) return fala(['Contrato recebido! Obrigado.', 'A Dra. Karolinne vai conferir a assinatura do gov.br. Se precisar de algo, a equipe chama você.']) + '<div class="cartao"><span class="nota">Protocolo</span><div class="codigo">' + esc(G.protocolo) + '</div></div>';
   return fala(['Documentos assinados! Obrigado.', 'Uma cópia fica guardada no seu prontuário. Se quiser uma via, peça à equipe.']) + '<div class="cartao"><span class="nota">Protocolo</span><div class="codigo">' + esc(G.protocolo) + '</div>' +
     (G.modo === 'ipad' ? '<button class="btn" type="button" id="encerrar">Encerrar e devolver o iPad</button>' : '') + '</div>';
 };
@@ -999,8 +1042,8 @@ lerLocal(function (loc) {
     var salvo = null; try { salvo = JSON.parse(sessionStorage.getItem(CHAVE) || 'null'); } catch (e) {}
     if (p.assinar) {
       chamar('apiTratamentoAbrir', p.assinar).then(function (t) {
-        G.trat = { token: p.assinar, docs: t.docs, campos: t.campos, plano: t.plano || [], resp: {}, ass: {}, i: 0, signatario: t.paciente.nome };
-        G.tela = 'tratamento'; render();
+        G.trat = { token: p.assinar, docs: t.docs, campos: t.campos, plano: t.plano || [], resp: {}, ass: {}, i: 0, signatario: t.paciente.nome, govbr: t.govbr };
+        G.tela = t.etapa === 'govbr' ? 'tratGovbr' : 'tratamento'; render();
       }).catch(function (e) { $('#app').innerHTML = fala('<span class="erro">' + esc(e.msg) + '</span>'); });
       vigiar(); return;
     }
