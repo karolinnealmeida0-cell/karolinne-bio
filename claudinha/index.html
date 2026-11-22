@@ -96,6 +96,9 @@ body.bio main{padding-top:28px;padding-bottom:40px;gap:16px;max-width:520px}
 .bio-card b{display:block;font-family:var(--titulo);font-size:22px;letter-spacing:.06em;color:var(--marrom);font-weight:600;text-transform:uppercase}
 .bio-card small{display:block;color:var(--suave);font-size:14px;line-height:1.4}
 .bio-card .seta{width:36px;height:36px;border-radius:50%;background:var(--off);display:grid;place-items:center;color:var(--marrom)}
+.doc.falta-ler{border-color:var(--aviso);box-shadow:0 0 0 3px rgba(165,85,46,.15)}.doc.lido{border-color:var(--ok)}
+.urgente{border:2px solid var(--aviso)}.urgente h2{color:var(--aviso)}
+.codigo-box{background:#FBF3EC;border:1px solid var(--caramelo);border-radius:14px;padding:12px 14px;margin-top:10px}
 .aviso-gov{background:#FBF3EC;border:1px solid var(--caramelo);border-radius:14px;padding:12px 14px;margin:10px 0;font-size:16px}
 ol.passos{padding-left:22px;margin:6px 0 12px}ol.passos li{margin:6px 0}
 .bio-rod{text-align:center;color:var(--suave);font-size:12px;margin-top:10px}
@@ -253,6 +256,28 @@ function mostrarErro(e, alvo) {
   if (el) el.innerHTML = '<p class="erro">' + msg + '</p>'; else $('#app').insertAdjacentHTML('afterbegin', fala('<span class="erro">' + msg + '</span>'));
 }
 
+/* Leitura completa: registra quando o documento foi rolado até o fim e quanto tempo ficou na tela (vai para o comprovante). */
+function vigiarLeitura(chave) {
+  var el = document.querySelector('.doc'); if (!el) return function () { return true; };
+  G.leitura = G.leitura || {}; var L = G.leitura[chave] = G.leitura[chave] || { inicio: Date.now() };
+  var ver = function () { if (!L.inteiro && el.scrollHeight - el.scrollTop - el.clientHeight < 16) { L.inteiro = true; L.segundos = Math.round((Date.now() - L.inicio) / 1000); el.classList.add('lido'); } return !!L.inteiro; };
+  el.addEventListener('scroll', ver, { passive: true }); setTimeout(ver, 50);
+  return function () { if (ver()) return true; el.classList.add('falta-ler'); el.scrollIntoView({ behavior: 'smooth', block: 'center' }); return false; };
+}
+/* Triagem de urgência: palavras de alerta interrompem o fluxo e orientam o contato humano (não diagnostica). */
+var URGENCIA = /(dor (muito )?(forte|intensa|insuport)|muita dor|incha[çc]|sangr|trauma|acidente|caiu|quebr|febre|falta de ar|dificuldade (para|de|pra) (respirar|engolir)|n[aã]o consigo (respirar|engolir|abrir a boca)|urg[eê]ncia|emerg[eê]ncia)/i;
+function checarUrgencia(texto, continuar) {
+  if (!URGENCIA.test(String(texto || '')) || G.urgenciaVista) { continuar(); return; }
+  var tel = String(G.cfg.telefone || '').replace(/\D/g, '');
+  $('#modal').innerHTML = '<div class="cartao urgente" role="alertdialog" aria-modal="true" aria-label="Possível urgência"><h2>Atenção</h2><p>' + esc(G.T.mensagens.urgencia) + '</p>' +
+    '<a class="btn" href="tel:+55' + tel + '" style="display:block;text-align:center;text-decoration:none">Ligar para a clínica</a>' +
+    (G.modo === 'ipad' ? '' : '<a class="btn sec" href="' + esc(linkWhatsEquipe()) + '" target="_blank" rel="noopener" style="display:block;text-align:center;text-decoration:none;margin-top:8px">Chamar no WhatsApp</a>') +
+    '<a class="btn sec" href="tel:192" style="display:block;text-align:center;text-decoration:none;margin-top:8px">Ligar 192 (SAMU)</a>' +
+    '<button class="btn leve" type="button" id="urg-seguir" style="margin-top:8px">Não é urgência, continuar</button></div>';
+  $('#modal').hidden = false; $('#urg-seguir').focus();
+  $('#urg-seguir').onclick = function () { $('#modal').hidden = true; G.urgenciaVista = true; continuar(); };
+}
+function leituraParaEnvio() { var o = {}; Object.keys(G.leitura || {}).forEach(function (k) { if (G.leitura[k].inteiro) o[k] = { segundos: G.leitura[k].segundos || 0 }; }); return o; }
 TELAS.carregando = function () { return fala('Só um instante…'); };
 
 TELAS.inicio = function () {
@@ -446,6 +471,7 @@ TELAS.anamnese.depois = function () {
   var prox = $('#prox'); if (prox) prox.onclick = function () {
     if (q.tipo === 'texto' && q.obrigatorio && !String(a[q.id] || '').trim()) { $('#msg').innerHTML = '<p class="erro">Esta resposta é importante. Escreva com suas palavras.</p>'; return; }
     if (q.tipo === 'multi' && !(a[q.id] || []).length) { $('#msg').innerHTML = '<p class="erro">Marque ao menos uma opção.</p>'; return; }
+    if (q.tipo === 'texto') { checarUrgencia(a[q.id], avancar); return; }
     avancar();
   };
   var pular = $('#pular'); if (pular) pular.onclick = avancar;
@@ -520,11 +546,13 @@ TELAS.documentos = function () {
     '<p class="nota">' + esc(I.termos) + '</p><div id="msg"></div><button class="btn" type="button" id="seguir">Continuar para a assinatura</button></div>';
 };
 TELAS.documentos.depois = function () {
+  var leu = vigiarLeitura('Aviso de privacidade');
   $('#ciencia').onchange = function () { G.dados.cienciaPrivacidade = this.checked; guardarLocal(); };
   document.querySelectorAll('[data-img]').forEach(function (b) { b.onclick = function () { G.dados.imagem[b.dataset.img] = b.dataset.iv; var y = window.scrollY; render(); window.scrollTo(0, y); }; });
   var det = $('#img-det'); if (det) det.oninput = function () { G.dados.imagem.detalhe = det.value; };
   $('#seguir').onclick = function () {
     var p = [];
+    if (!leu()) p.push('ler o aviso de privacidade até o fim (role o quadro)');
     if (!G.dados.cienciaPrivacidade) p.push('marcar a ciência do aviso de privacidade');
     if (G.T.imagem.opcoes.some(function (o) { return !G.dados.imagem[o.id]; })) p.push('responder todas as opções de imagem (pode ser "Não autorizo")');
     if (p.length) { $('#msg').innerHTML = '<div class="pend">Para continuar: ' + p.join('; ') + '.</div>'; return; }
@@ -562,7 +590,7 @@ TELAS.assinatura.depois = function () {
   };
 };
 function enviar(b) {
-  chamar('apiFinalizar', G.token, { dados: G.dados, assinaturas: { declaracao: G.sig.declaracao, imagem: G.sig.imagem || '' }, confirmacaoIdentidade: true, aparelho: navigator.userAgent })
+  chamar('apiFinalizar', G.token, { dados: G.dados, assinaturas: { declaracao: G.sig.declaracao, imagem: G.sig.imagem || '' }, confirmacaoIdentidade: true, aparelho: navigator.userAgent, leitura: leituraParaEnvio() })
     .then(function (r) { G.protocolo = r.protocolo; limparLocal(); $('#faixa').hidden = true; ir('final', true); })
     .catch(function (e) {
       b.disabled = false; b.textContent = 'Tentar enviar de novo';
@@ -596,7 +624,7 @@ function reiniciar() {
   clearTimeout(G.timerFinal);
   if (G.token && G.tela !== 'final') chamar('apiEncerrar', G.token).catch(function () {});
   limparLocal();
-  G.token = ''; G.codigo = ''; G.protocolo = ''; G.qi = 0; G.pilha = []; G.sig = {}; G.voltarRevisao = false;
+  G.token = ''; G.codigo = ''; G.protocolo = ''; G.qi = 0; G.pilha = []; G.sig = {}; G.voltarRevisao = false; G.leitura = {}; G.consulta = null; G.govbrEnviado = false; G.urgenciaVista = false;
   G.dados = { cadastro: {}, anamnese: {}, imagem: {}, cienciaPrivacidade: false };
   $('#modal').hidden = true; ir('inicio', true);
 }
@@ -639,7 +667,9 @@ TELAS.equipe = function () {
 TELAS.equipe.depois = function () { ligarContato(null, 'Recebido! A equipe vai entrar em contato com você.'); };
 function ligarContato(assuntoFixo, okMsg) {
   $('#f-ok').onclick = function () {
-    var b = this; b.disabled = true;
+    var b = this, assunto = assuntoFixo || ($('#f-assunto') ? $('#f-assunto').value : '');
+    if (!b.dataset.urgOk && URGENCIA.test(assunto)) { checarUrgencia(assunto, function () { b.dataset.urgOk = '1'; b.click(); }); return; }
+    b.disabled = true;
     chamar('apiRecado', { nome: $('#f-nome').value, telefone: $('#f-tel').value, assunto: assuntoFixo || ($('#f-assunto') ? $('#f-assunto').value : '') })
       .then(function () { $('#app').innerHTML = fala(esc(okMsg)) + '<button class="btn sec" type="button" id="vi">Voltar ao início</button>'; $('#vi').onclick = function () { ir('inicio'); }; })
       .catch(function (e) { b.disabled = false; mostrarErro(e, '#msg'); });
@@ -672,14 +702,29 @@ TELAS.consultaDetalhe.depois = function () {
   document.querySelectorAll('[data-ac]').forEach(function (b) {
     b.onclick = function () {
       var ac = b.dataset.ac;
-      if (ac === 'remarcar') { ir('remarcar'); return; }
+      if (ac === 'remarcar') { pedirCodigo(function () { ir('remarcar'); }); return; }
       if (ac === 'cancelar' && !b.dataset.confirmar) { b.dataset.confirmar = '1'; b.textContent = 'Toque de novo para confirmar o cancelamento'; return; }
+      if (ac === 'cancelar' && !G.consulta.cod && G.consulta.r.pedeCodigo) { pedirCodigo(function () { b.click(); }); return; }
       b.disabled = true;
-      chamar('apiAcaoConsulta', G.consulta.codigo, G.consulta.telefone, ac, '').then(function (r) { $('#app').innerHTML = fala(esc(r.mensagem)) + '<button class="btn sec" type="button" id="vi">Voltar ao início</button>'; $('#vi').onclick = function () { ir('inicio'); }; })
-        .catch(function (e) { b.disabled = false; mostrarErro(e, '#msg'); });
+      chamar('apiAcaoConsulta', G.consulta.codigo, G.consulta.telefone, ac, '', G.consulta.cod || '').then(function (r) { $('#app').innerHTML = fala(esc(r.mensagem)) + '<button class="btn sec" type="button" id="vi">Voltar ao início</button>'; $('#vi').onclick = function () { ir('inicio'); }; })
+        .catch(function (e) { b.disabled = false; if (/^CODIGO/.test(e.codigo || '')) G.consulta.cod = ''; mostrarErro(e, '#msg'); });
     };
   });
 };
+/* Segurança: para remarcar ou cancelar, quem tem e-mail no cadastro recebe um código de 6 dígitos (vale 15 min). */
+function pedirCodigo(depois) {
+  if (!G.consulta.r.pedeCodigo || G.consulta.cod) { depois(); return; }
+  $('#msg').innerHTML = '<p class="nota">Enviando um código de segurança para o seu e-mail…</p>';
+  chamar('apiCodigoConsulta', G.consulta.codigo, G.consulta.telefone).then(function (r) {
+    if (!r.enviado) { depois(); return; }
+    $('#msg').innerHTML = '<div class="codigo-box"><p>Para sua segurança, enviamos um código de 6 dígitos para <b>' + esc(r.para) + '</b>. Ele vale por 15 minutos.</p>' +
+      '<label class="campo">Código<input type="text" id="cod-email" inputmode="numeric" autocomplete="one-time-code" maxlength="6"></label>' +
+      '<button class="btn" type="button" id="cod-ok">Confirmar código</button><button class="btn leve" type="button" id="cod-reenviar">Não chegou? Enviar de novo</button>' +
+      '<p class="nota">Confira também a caixa de spam. Se não tiver acesso ao e-mail, toque em Falar com a equipe.</p></div>';
+    $('#cod-ok').onclick = function () { var c = ($('#cod-email').value || '').replace(/\D/g, ''); if (c.length !== 6) { $('#cod-email').focus(); return; } G.consulta.cod = c; depois(); };
+    $('#cod-reenviar').onclick = function () { pedirCodigo(depois); };
+  }).catch(function (e) { mostrarErro(e, '#msg'); });
+}
 TELAS.remarcar = function () {
   return fala('Escolha o novo horário. ' + (G.cfg.modoAgenda === 'automatico' ? 'A mudança é feita na hora.' : 'A equipe confirma a mudança; sua consulta atual continua valendo até lá.')) +
     '<div class="cartao"><div id="horarios" class="horarios"><span class="nota">Carregando horários…</span></div><div id="msg"></div><button class="btn" type="button" id="rm-ok">Remarcar</button></div>';
@@ -689,8 +734,8 @@ TELAS.remarcar.depois = function () {
   $('#rm-ok').onclick = function () {
     var b = this, h = esc2(); if (!h) { $('#msg').innerHTML = '<p class="erro">Escolha um horário.</p>'; return; }
     b.disabled = true;
-    chamar('apiAcaoConsulta', G.consulta.codigo, G.consulta.telefone, 'remarcar', h).then(function (r) { $('#app').innerHTML = fala(esc(r.mensagem)) + '<button class="btn sec" type="button" id="vi">Voltar ao início</button>'; $('#vi').onclick = function () { ir('inicio'); }; })
-      .catch(function (e) { b.disabled = false; mostrarErro(e, '#msg'); });
+    chamar('apiAcaoConsulta', G.consulta.codigo, G.consulta.telefone, 'remarcar', h, G.consulta.cod || '').then(function (r) { G.consulta.cod = ''; $('#app').innerHTML = fala(esc(r.mensagem)) + '<button class="btn sec" type="button" id="vi">Voltar ao início</button>'; $('#vi').onclick = function () { ir('inicio'); }; })
+      .catch(function (e) { b.disabled = false; if (/^CODIGO/.test(e.codigo || '')) G.consulta.cod = ''; mostrarErro(e, '#msg'); });
   };
 };
 function carregarHorarios() {
@@ -738,13 +783,14 @@ TELAS.tratamento = function () {
 };
 TELAS.tratamento.depois = function () {
   var T = G.trat, d = T.docs[T.i], r = T.resp[d.id];
-  var viaGov = T.govbr && d.id === '05';
+  var viaGov = T.govbr && d.id === '05', leu = vigiarLeitura(d.id + ' · ' + d.titulo);
   G.sig.trat = null; if (!viaGov) { criarPad('trat'); $('#limpa-trat').onclick = function () { G.sig.trat = null; criarPad('trat'); }; }
   document.querySelectorAll('[data-tr]').forEach(function (el) { el.oninput = function () { r[el.dataset.tr] = el.value; }; });
   document.querySelectorAll('[data-trc]').forEach(function (el) { el.onchange = function () { r[el.dataset.trc] = el.checked; }; });
   $('#tr-ok').onclick = function () {
     var p = [];
     d.itens.forEach(function (it) { if (it.t === 'ck' && !r[it.k]) p.push('marcar: ' + it.l); if (it.t === 'f' && it.who === 'p' && it.req && !String(r[it.k] || '').trim()) p.push(it.l); });
+    if (!leu()) p.push('ler o documento até o fim (role o quadro)');
     if (!G.sig.trat && !viaGov) p.push('assinar');
     var ultimo = T.i === T.docs.length - 1;
     if (ultimo && !$('#confirma-trat').checked) p.push('marcar a confirmação final');
@@ -752,7 +798,7 @@ TELAS.tratamento.depois = function () {
     if (!viaGov) T.ass[d.id] = G.sig.trat;
     if (!ultimo) { T.i++; render(); window.scrollTo(0, 0); return; }
     var b = this; b.disabled = true; b.textContent = 'Enviando…';
-    chamar('apiTratamentoAssinar', T.token, { respostas: T.resp, assinaturas: T.ass, confirmacaoIdentidade: true, aparelho: navigator.userAgent })
+    chamar('apiTratamentoAssinar', T.token, { respostas: T.resp, assinaturas: T.ass, confirmacaoIdentidade: true, aparelho: navigator.userAgent, leitura: leituraParaEnvio(), modo: G.modo })
       .then(function (res) { G.protocolo = res.protocolo; G.tela = res.govbr ? 'tratGovbr' : 'tratFinal'; render(); window.scrollTo(0, 0); })
       .catch(function (e) { b.disabled = false; b.textContent = 'Tentar enviar de novo'; mostrarErro(e, '#msg'); });
   };
