@@ -237,7 +237,7 @@ $('#b-voltar').addEventListener('click', function () {
   var t = G.pilha.pop(); if (t) { G.tela = t; render(); window.scrollTo(0, 0); }
 });
 // "Falar com a equipe": no celular abre o WhatsApp do consultório (mensagem neutra, sem dados de saúde); no iPad da recepção, o recado.
-function linkWhatsEquipe() { return 'https://wa.me/55' + String((G.cfg && G.cfg.telefone) || '').replace(/\D/g, '') + '?text=' + encodeURIComponent('Olá! Vim pela Claudinha e gostaria de falar com a equipe.'); }
+function linkWhatsEquipe(texto) { return 'https://wa.me/55' + String((G.cfg && G.cfg.telefone) || '').replace(/\D/g, '') + '?text=' + encodeURIComponent(texto || 'Olá! Vim pela Claudinha e gostaria de falar com a equipe.'); }
 function abrirWhats() { var a = document.createElement('a'); a.href = linkWhatsEquipe(); a.target = '_blank'; a.rel = 'noopener'; document.body.appendChild(a); a.click(); a.remove(); }
 $('#b-equipe').addEventListener('click', function () { if (G.modo === 'ipad' || !G.cfg) ir('equipe'); else abrirWhats(); });
 
@@ -695,7 +695,9 @@ TELAS.consultaDetalhe = function () {
   var st = r.status === 'confirmada' ? 'confirmada' + (r.presenca ? ' · presença confirmada' : '') : 'aguardando confirmação da equipe';
   return fala(['Encontrei sua consulta: <b>' + esc(r.rotulo) + '</b> (' + esc(st) + ').', '<b>Orientações</b><br>' + G.T.orientacoes.map(esc).join('<br>')]) +
     '<div class="cartao"><div class="rapidas">' + (r.status === 'confirmada' && !r.presenca ? '<button class="btn" type="button" data-ac="presenca">Confirmar presença</button>' : '') +
-    (r.podeAlterar ? '<button class="btn sec" type="button" data-ac="remarcar">Remarcar</button><button class="btn sec" type="button" data-ac="cancelar">Cancelar consulta</button>' : '') + '</div>' +
+    (r.podeAlterar && !r.soEquipe ? '<button class="btn sec" type="button" data-ac="remarcar">Remarcar</button><button class="btn sec" type="button" data-ac="cancelar">Cancelar consulta</button>' : '') +
+    (r.podeAlterar && r.soEquipe ? '<a class="btn sec" id="rc-whats" target="_blank" rel="noopener" href="' + esc(linkWhatsEquipe('Olá! Vim pela Claudinha e gostaria de remarcar ou cancelar minha consulta.')) + '">Remarcar ou cancelar pelo WhatsApp</a>' : '') + '</div>' +
+    (r.podeAlterar && r.soEquipe ? '<p class="nota">Como você não tem e-mail no cadastro, para sua segurança a remarcação e o cancelamento são feitos com a equipe, pelo WhatsApp.</p>' : '') +
     (r.podeAlterar ? '' : '<p class="nota">Faltam menos de ' + G.cfg.prazoAlteracao + ' horas para a consulta. Para remarcar ou cancelar, fale com a equipe: ' + esc(G.cfg.telefone) + '.</p>') + '<div id="msg"></div></div>';
 };
 TELAS.consultaDetalhe.depois = function () {
