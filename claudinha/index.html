@@ -236,7 +236,7 @@ $('#b-voltar').addEventListener('click', function () {
   if (G.tela === 'final') return;
   var t = G.pilha.pop(); if (t) { G.tela = t; render(); window.scrollTo(0, 0); }
 });
-// "Falar com a equipe": no celular abre o WhatsApp da clínica (mensagem neutra, sem dados de saúde); no iPad da recepção, o recado.
+// "Falar com a equipe": no celular abre o WhatsApp do consultório (mensagem neutra, sem dados de saúde); no iPad da recepção, o recado.
 function linkWhatsEquipe() { return 'https://wa.me/55' + String((G.cfg && G.cfg.telefone) || '').replace(/\D/g, '') + '?text=' + encodeURIComponent('Olá! Vim pela Claudinha e gostaria de falar com a equipe.'); }
 function abrirWhats() { var a = document.createElement('a'); a.href = linkWhatsEquipe(); a.target = '_blank'; a.rel = 'noopener'; document.body.appendChild(a); a.click(); a.remove(); }
 $('#b-equipe').addEventListener('click', function () { if (G.modo === 'ipad' || !G.cfg) ir('equipe'); else abrirWhats(); });
@@ -270,7 +270,7 @@ function checarUrgencia(texto, continuar) {
   if (!URGENCIA.test(String(texto || '')) || G.urgenciaVista) { continuar(); return; }
   var tel = String(G.cfg.telefone || '').replace(/\D/g, '');
   $('#modal').innerHTML = '<div class="cartao urgente" role="alertdialog" aria-modal="true" aria-label="Possível urgência"><h2>Atenção</h2><p>' + esc(G.T.mensagens.urgencia) + '</p>' +
-    '<a class="btn" href="tel:+55' + tel + '" style="display:block;text-align:center;text-decoration:none">Ligar para a clínica</a>' +
+    '<a class="btn" href="tel:+55' + tel + '" style="display:block;text-align:center;text-decoration:none">Ligar para o consultório</a>' +
     (G.modo === 'ipad' ? '' : '<a class="btn sec" href="' + esc(linkWhatsEquipe()) + '" target="_blank" rel="noopener" style="display:block;text-align:center;text-decoration:none;margin-top:8px">Chamar no WhatsApp</a>') +
     '<a class="btn sec" href="tel:192" style="display:block;text-align:center;text-decoration:none;margin-top:8px">Ligar 192 (SAMU)</a>' +
     '<button class="btn leve" type="button" id="urg-seguir" style="margin-top:8px">Não é urgência, continuar</button></div>';
@@ -284,7 +284,7 @@ TELAS.inicio = function () {
   var T = G.T.mensagens, ipad = G.modo === 'ipad';
   var grandes = (ipad ? [['novo', 'Fazer meu cadastro', 'Ficha e informações de saúde, com segurança'], ['agendar', 'Agendar consulta', 'Escolha o dia e o horário']]
     : [['agendar', 'Agendar consulta', 'Escolha o dia e o horário'], ['agendada', 'Já tenho consulta agendada', 'Confirmar, remarcar ou cancelar']]);
-  var outros = [['novo', 'Sou paciente novo'], ['antigo', 'Já sou paciente da clínica'], ['agendada', 'Tenho uma consulta agendada'], ['documentos', 'Preciso preencher meus documentos'], ['info', 'Quero informações sobre tratamentos'], ['agendar', 'Quero agendar uma consulta'], ['equipe', 'Preciso falar com a equipe']]
+  var outros = [['novo', 'Sou paciente novo'], ['antigo', 'Já sou paciente do consultório'], ['agendada', 'Tenho uma consulta agendada'], ['documentos', 'Preciso preencher meus documentos'], ['info', 'Quero informações sobre tratamentos'], ['agendar', 'Quero agendar uma consulta'], ['equipe', 'Preciso falar com a equipe']]
     .filter(function (o) { return !grandes.some(function (g) { return g[0] === o[0]; }); });
   return fala(T.saudacao.map(esc)) + fala('Como posso ajudar você hoje?') +
     '<div class="principais" role="group" aria-label="Principais opções">' + grandes.map(function (g, i) { return '<button class="grande' + (i ? ' claro' : '') + '" type="button" data-ir="' + g[0] + '">' + esc(g[1]) + '<small>' + esc(g[2]) + '</small></button>'; }).join('') + '</div>' +
@@ -658,9 +658,9 @@ function formContato(titulo, extra, botao) {
     '<p class="nota">' + esc(G.T.mensagens.whatsapp) + '</p><div id="msg"></div><button class="btn" type="button" id="f-ok">' + botao + '</button></div>';
 }
 TELAS.antigo = function () { return fala(esc(G.T.mensagens.pacienteAntigo)) + formContato('Pedido de link de atualização', '', 'Pedir meu link'); };
-TELAS.antigo.depois = function () { ligarContato('Atualização de cadastro (paciente da clínica)', 'Pronto! A equipe vai enviar seu link pessoal de atualização pelo WhatsApp. Ele vale por 72 horas.'); };
+TELAS.antigo.depois = function () { ligarContato('Atualização de cadastro (paciente do consultório)', 'Pronto! A equipe vai enviar seu link pessoal de atualização pelo WhatsApp. Ele vale por 72 horas.'); };
 TELAS.equipe = function () {
-  return fala(esc(G.T.mensagens.equipe) + '<br>Telefone da clínica: <b>' + esc(G.cfg.telefone) + '</b>') +
+  return fala(esc(G.T.mensagens.equipe) + '<br>Telefone do consultório: <b>' + esc(G.cfg.telefone) + '</b>') +
     (G.modo === 'ipad' ? '' : '<a class="btn" id="eq-wa" href="' + esc(linkWhatsEquipe()) + '" target="_blank" rel="noopener" style="display:block;text-align:center;text-decoration:none;margin-bottom:14px">Conversar pelo WhatsApp</a><p class="nota" style="text-align:center;margin-top:-6px">Ou deixe um recado e a equipe chama você:</p>') +
     formContato('Falar com a equipe', '<label class="campo">Assunto (sem informações de saúde)<input type="text" id="f-assunto" maxlength="200"></label>', 'Enviar pedido de contato');
 };
@@ -810,7 +810,7 @@ TELAS.tratGovbr = function () {
     '<div class="cartao"><span class="cat">Passo 2</span><h2>Assine no gov.br</h2><ol class="passos"><li>Toque em <b>Abrir o assinador do gov.br</b> e entre com a sua conta gov.br (nível <b>prata ou ouro</b>).</li><li>Escolha o arquivo do contrato que você baixou.</li><li>Toque no lugar da assinatura, depois em <b>Assinar</b>, e confirme com o código que chega no seu celular.</li><li>Baixe o <b>arquivo assinado</b>.</li></ol>' +
     '<a class="btn sec" href="https://assinador.iti.br" target="_blank" rel="noopener" style="display:block;text-align:center;text-decoration:none">Abrir o assinador do gov.br</a></div>' +
     '<div class="cartao"><span class="cat">Passo 3</span><h2>Envie o contrato assinado</h2><input type="file" id="gv-arq" accept="application/pdf"><div id="msg"></div><button class="btn" type="button" id="gv-enviar">Enviar contrato assinado</button>' +
-    '<p class="nota">Não tem conta gov.br prata ou ouro? Fale com a equipe: dá para assinar na clínica.</p></div>';
+    '<p class="nota">Não tem conta gov.br prata ou ouro? Fale com a equipe: dá para assinar no consultório.</p></div>';
 };
 TELAS.tratGovbr.depois = function () {
   var T = G.trat;
@@ -900,7 +900,7 @@ TELAS.agDados = function () {
   return '<div class="cartao">' + passo(4, 5, 'Seu nome e telefone') +
     '<label class="campo">Nome completo<input type="text" id="f-nome" autocomplete="name" value="' + esc(G.ag.nome || '') + '"></label>' +
     '<label class="campo">Telefone com DDD (WhatsApp)<input type="tel" id="f-tel" autocomplete="tel" placeholder="(21) 99999-9999" value="' + esc(G.ag.tel || '') + '"></label>' +
-    '<div class="campo"><span>Como você conheceu a clínica? (opcional)</span><div class="rapidas">' + (G.cfg.origens || []).map(function (o) { return '<button type="button" class="chip" data-or="' + esc(o) + '" aria-pressed="' + (G.ag.origem === o) + '">' + esc(o) + '</button>'; }).join('') + '</div></div>' +
+    '<div class="campo"><span>Como você conheceu o consultório? (opcional)</span><div class="rapidas">' + (G.cfg.origens || []).map(function (o) { return '<button type="button" class="chip" data-or="' + esc(o) + '" aria-pressed="' + (G.ag.origem === o) + '">' + esc(o) + '</button>'; }).join('') + '</div></div>' +
     '<div id="msg"></div><button class="btn" type="button" id="f-ok">Continuar</button></div>';
 };
 TELAS.agDados.depois = function () {
@@ -953,7 +953,7 @@ TELAS.agResumo.depois = function () {
   };
 };
 
-/* Página da clínica (link da bio do Instagram): agendamento, WhatsApp e como chegar. */
+/* Página do consultório (link da bio do Instagram): agendamento, WhatsApp e como chegar. */
 var ICONES = {"cal": "<svg width=\"28\" height=\"28\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><rect x=\"3.5\" y=\"5\" width=\"17\" height=\"15\" rx=\"3\"/><path d=\"M8 3v4M16 3v4M3.5 10h17\"/></svg>", "pin": "<svg width=\"28\" height=\"28\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z\"/><circle cx=\"12\" cy=\"9.5\" r=\"2.6\"/></svg>", "wa": "<svg width=\"28\" height=\"28\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 20l1.3-3.9A8 8 0 1 1 8 19z\"/><path d=\"M9.2 8.6c.2-.5.6-.5.9-.5h.5c.2 0 .4.1.5.4l.6 1.5c.1.2 0 .5-.1.6l-.5.6c.6 1.1 1.4 1.9 2.5 2.5l.6-.5c.2-.2.4-.2.6-.1l1.5.6c.3.1.4.3.4.5v.5c0 .3-.1.7-.5.9-.6.3-1.4.4-2.3 0-1.9-.8-3.5-2.4-4.3-4.3-.4-.9-.3-1.7 0-2.3z\"/></svg>", "google": "<svg width=\"28\" height=\"28\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M12 3.5l2.6 5.3 5.8.8-4.2 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.2-4.1 5.8-.8z\"/></svg>", "seta": "<svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M9 6l6 6-6 6\"/></svg>"};
 TELAS.clinica = function () {
   var tel = String(G.cfg.telefone || '').replace(/\D/g, ''), wa = 'https://wa.me/55' + tel, mapa = 'https://www.google.com/maps/dir/?api=1&destination=' + encodeURIComponent(G.cfg.mapaDestino || G.cfg.endereco || '') + (G.cfg.mapaPlaceId ? '&destination_place_id=' + encodeURIComponent(G.cfg.mapaPlaceId) : '');
@@ -993,7 +993,7 @@ TELAS.orientacoes = function () {
 /* Link curto da avaliação no Google */
 TELAS.google = function () {
   return fala('Obrigada por querer avaliar a Karolinne Almeida Odontologia! 💛') + '<div class="cartao"><p>Toque no botão abaixo. No Google, toque em <b>"Escrever uma avaliação"</b>, escolha as estrelas e, se quiser, escreva um comentário.</p>' +
-    (G.cfg.googleAvaliacao ? '<a class="btn" style="text-align:center;text-decoration:none;display:block" href="' + esc(G.cfg.googleAvaliacao) + '" target="_blank" rel="noopener">Abrir a clínica no Google</a>' : '<p class="nota">O link do Google ainda não foi configurado.</p>') +
+    (G.cfg.googleAvaliacao ? '<a class="btn" style="text-align:center;text-decoration:none;display:block" href="' + esc(G.cfg.googleAvaliacao) + '" target="_blank" rel="noopener">Abrir o consultório no Google</a>' : '<p class="nota">O link do Google ainda não foi configurado.</p>') +
     '<p class="nota">É opcional e não há nenhuma recompensa: queremos apenas a sua opinião sincera.</p></div>';
 };
 
@@ -1021,7 +1021,7 @@ TELAS.pesquisa = function () {
   return fala('Que bom ter você por aqui! Como foi sua experiência na Karolinne Almeida Odontologia?') + '<div class="cartao"><h2>Sua opinião</h2>' +
     '<div class="campo"><span>De 1 a 5, como você avalia o atendimento?</span><div class="notas" role="group" aria-label="Nota">' +
     [1, 2, 3, 4, 5].map(function (n) { return '<button type="button" class="nota-bt" data-nota="' + n + '" aria-pressed="false">' + '<span>★</span><span style="font-size:20px">' + n + '</span><small>' + rot[n - 1] + '</small></button>'; }).join('') + '</div></div>' +
-    '<div class="campo"><span>Você indicaria a clínica para alguém? (opcional)</span><div class="rapidas"><button type="button" class="chip" data-rec="Sim" aria-pressed="false">Sim</button><button type="button" class="chip" data-rec="Talvez" aria-pressed="false">Talvez</button><button type="button" class="chip" data-rec="Não" aria-pressed="false">Não</button></div></div>' +
+    '<div class="campo"><span>Você indicaria o consultório para alguém? (opcional)</span><div class="rapidas"><button type="button" class="chip" data-rec="Sim" aria-pressed="false">Sim</button><button type="button" class="chip" data-rec="Talvez" aria-pressed="false">Talvez</button><button type="button" class="chip" data-rec="Não" aria-pressed="false">Não</button></div></div>' +
     '<label class="campo">Quer deixar um comentário? (opcional, sem informações de saúde)<textarea id="q-com" maxlength="600"></textarea></label>' +
     '<div id="msg"></div><button class="btn" type="button" id="q-ok">Enviar minha opinião</button><p class="nota">A pesquisa é anônima: não pedimos seu nome.</p></div>';
 };
@@ -1035,7 +1035,7 @@ TELAS.pesquisa.depois = function () {
     chamar('apiPesquisa', { nota: nota, recomendaria: rec, comentario: $('#q-com').value }).then(function (r) {
       G.pilha = [];
       $('#app').innerHTML = fala('Muito obrigada pela sua opinião! Ela nos ajuda a cuidar cada vez melhor de você. 💛') +
-        (r.google ? '<div class="cartao"><p>Se puder, conte também no Google como foi sua experiência. Isso ajuda outras pessoas a conhecer a clínica.</p><a class="btn" style="text-align:center;text-decoration:none;display:block" href="' + esc(r.google) + '" target="_blank" rel="noopener">Avaliar no Google</a><p class="nota">É opcional e não há nenhuma recompensa: queremos apenas a sua opinião sincera.</p></div>' : '') +
+        (r.google ? '<div class="cartao"><p>Se puder, conte também no Google como foi sua experiência. Isso ajuda outras pessoas a conhecer o consultório.</p><a class="btn" style="text-align:center;text-decoration:none;display:block" href="' + esc(r.google) + '" target="_blank" rel="noopener">Avaliar no Google</a><p class="nota">É opcional e não há nenhuma recompensa: queremos apenas a sua opinião sincera.</p></div>' : '') +
         '<button class="btn sec" type="button" id="vi">Voltar ao início</button>';
       $('#vi').onclick = function () { ir('inicio'); };
     }).catch(function (e) { b.disabled = false; mostrarErro(e, '#msg'); });
