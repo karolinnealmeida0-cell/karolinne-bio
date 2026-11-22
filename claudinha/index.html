@@ -18,6 +18,15 @@
 }
 *{box-sizing:border-box}
 [hidden]{display:none!important}
+.acess{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;padding:6px 10px 0}
+.acess button{min-height:44px;min-width:48px;border-radius:12px;border:1px solid var(--nude);background:var(--branco);color:var(--marrom);font-weight:600;font-size:15px;padding:6px 12px}
+.acess button[aria-pressed="true"]{background:var(--marrom);color:#FFF8F0}
+body.contraste{--off:#FFFFFF;--bege:#FFFFFF;--nude:#000000;--caramelo:#000000;--marrom:#000000;--suave:#000000;--tinta:#000000;--dourado:#000000}
+body.contraste .balao,body.contraste .cartao{border:2px solid #000}
+body.contraste a{color:#00008B;text-decoration:underline}
+:focus-visible{outline:3px solid #1A5FB4!important;outline-offset:3px}
+.docs-lista{display:grid;gap:10px}
+.docs-lista .doc{display:flex;justify-content:space-between;align-items:center;gap:10px;border:1px solid var(--nude);border-radius:14px;padding:12px 14px;background:var(--branco)}
 html,body{margin:0;background:var(--off);color:var(--tinta);font-family:var(--texto);font-size:17px;line-height:1.55;-webkit-text-size-adjust:100%}
 .topo{background:var(--off);border-bottom:1px solid var(--dourado);padding:14px max(16px,env(safe-area-inset-left)) 12px;text-align:center}
 .logo{width:92px;height:92px;border-radius:50%;display:block;margin:0 auto;box-shadow:0 2px 10px rgba(118,84,66,.12)}
@@ -143,6 +152,12 @@ a.grande{display:grid}
   <div id="marca-texto"><div class="marca1">KAROLINNE ALMEIDA</div><div class="marca2">ODONTOLOGIA</div></div>
   <div id="prog" hidden><div class="prog" id="prog-barras"></div><div class="prog-rot" id="prog-rot"></div></div>
 </header>
+<div class="acess" role="toolbar" aria-label="Acessibilidade">
+  <button type="button" id="ac-menos" aria-label="Diminuir a letra">A−</button>
+  <button type="button" id="ac-mais" aria-label="Aumentar a letra">A+</button>
+  <button type="button" id="ac-contraste" aria-pressed="false">Contraste</button>
+  <button type="button" id="ac-ouvir" aria-label="Ouvir o que está escrito">🔊 Ouvir</button>
+</div>
 <main id="app" aria-live="polite"></main>
 <nav class="rodape" id="rodape">
   <button class="btn leve" id="b-voltar" type="button">← Voltar</button>
@@ -243,12 +258,32 @@ $('#b-equipe').addEventListener('click', function () { if (G.modo === 'ipad' || 
 
 /* ---------- Telas ---------- */
 var TELAS = {};
+/* ---------- Acessibilidade: letra maior, contraste, ouvir o texto (voz do próprio aparelho, sem custo) ---------- */
+var ACESS = { zoom: 1, contraste: false };
+try { ACESS = Object.assign(ACESS, JSON.parse(localStorage.getItem('ka-acess') || '{}')); } catch (e) {}
+function aplicarAcess() {
+  document.body.style.zoom = ACESS.zoom; document.body.classList.toggle('contraste', !!ACESS.contraste);
+  $('#ac-contraste').setAttribute('aria-pressed', ACESS.contraste ? 'true' : 'false');
+  try { localStorage.setItem('ka-acess', JSON.stringify(ACESS)); } catch (e) {}
+}
+$('#ac-mais').onclick = function () { ACESS.zoom = Math.min(1.6, Math.round((ACESS.zoom + 0.15) * 100) / 100); aplicarAcess(); };
+$('#ac-menos').onclick = function () { ACESS.zoom = Math.max(0.85, Math.round((ACESS.zoom - 0.15) * 100) / 100); aplicarAcess(); };
+$('#ac-contraste').onclick = function () { ACESS.contraste = !ACESS.contraste; aplicarAcess(); };
+$('#ac-ouvir').onclick = function () {
+  if (!window.speechSynthesis) { alert('Este aparelho não tem leitura em voz alta.'); return; }
+  if (speechSynthesis.speaking) { speechSynthesis.cancel(); return; }
+  var t = Array.prototype.map.call(document.querySelectorAll('#app .balao, #app .pergunta, #app h2, #app label, #app button, #app .nota, #app p'), function (e) { return e.innerText; }).filter(Boolean).join('. ');
+  var u = new SpeechSynthesisUtterance(t.substr(0, 3000)); u.lang = 'pt-BR'; u.rate = 0.95; speechSynthesis.speak(u);
+};
+aplicarAcess();
 function render() {
+  if (window.speechSynthesis && speechSynthesis.speaking) speechSynthesis.cancel();
   progresso();
   $('#b-voltar').style.visibility = (G.tela === 'inicio' || G.tela === 'final') ? 'hidden' : 'visible';
   document.body.classList.toggle('bio', G.tela === 'clinica');
   $('#app').innerHTML = TELAS[G.tela]();
   if (TELAS[G.tela].depois) TELAS[G.tela].depois();
+  var h = document.querySelector('#app .balao'); if (h) { h.setAttribute('tabindex', '-1'); }
 }
 function mostrarErro(e, alvo) {
   var el = alvo ? $(alvo) : null, msg = esc(e.msg || 'Algo deu errado. Tente de novo.');
@@ -284,7 +319,7 @@ TELAS.inicio = function () {
   var T = G.T.mensagens, ipad = G.modo === 'ipad';
   var grandes = (ipad ? [['novo', 'Fazer meu cadastro', 'Ficha e informações de saúde, com segurança'], ['agendar', 'Agendar consulta', 'Escolha o dia e o horário']]
     : [['agendar', 'Agendar consulta', 'Escolha o dia e o horário'], ['agendada', 'Já tenho consulta agendada', 'Confirmar, remarcar ou cancelar']]);
-  var outros = [['novo', 'Sou paciente novo'], ['antigo', 'Já sou paciente do consultório'], ['agendada', 'Tenho uma consulta agendada'], ['documentos', 'Preciso preencher meus documentos'], ['info', 'Quero informações sobre tratamentos'], ['agendar', 'Quero agendar uma consulta'], ['equipe', 'Preciso falar com a equipe']]
+  var outros = [['novo', 'Sou paciente novo'], ['antigo', 'Já sou paciente do consultório'], ['agendada', 'Tenho uma consulta agendada'], ['documentos', 'Preciso preencher meus documentos'], ['info', 'Quero informações sobre tratamentos'], ['agendar', 'Quero agendar uma consulta'], ['meusdocs', 'Ver meus documentos'], ['equipe', 'Preciso falar com a equipe']]
     .filter(function (o) { return !grandes.some(function (g) { return g[0] === o[0]; }); });
   return fala(T.saudacao.map(esc)) + fala('Como posso ajudar você hoje?') +
     '<div class="principais" role="group" aria-label="Principais opções">' + grandes.map(function (g, i) { return '<button class="grande' + (i ? ' claro' : '') + '" type="button" data-ir="' + g[0] + '">' + esc(g[1]) + '<small>' + esc(g[2]) + '</small></button>'; }).join('') + '</div>' +
@@ -633,9 +668,9 @@ function reiniciar() {
 function retomarTela() { return G.tela && TELAS[G.tela] && G.tela !== 'inicio' ? G.tela : 'identificacao'; }
 TELAS.documentosMenu = function () {
   return fala('Você já começou o preenchimento antes ou vai começar agora?') +
-    '<div class="rapidas"><button class="rapida" type="button" id="b1">Vou começar agora</button><button class="rapida" type="button" id="b2">Continuar de onde parei</button><button class="rapida" type="button" id="b3">Já enviei: quero saber a situação</button></div>';
+    '<div class="rapidas"><button class="rapida" type="button" id="b1">Vou começar agora</button><button class="rapida" type="button" id="b2">Continuar de onde parei</button><button class="rapida" type="button" id="b3">Já enviei: quero saber a situação</button><button class="rapida" type="button" id="b4">Quero ver meus documentos</button></div>';
 };
-TELAS.documentosMenu.depois = function () { $('#b1').onclick = function () { ir('boasvindas'); }; $('#b2').onclick = function () { ir('retomar'); }; $('#b3').onclick = function () { ir('statusDocs'); }; };
+TELAS.documentosMenu.depois = function () { $('#b1').onclick = function () { ir('boasvindas'); }; $('#b2').onclick = function () { ir('retomar'); }; $('#b3').onclick = function () { ir('statusDocs'); }; $('#b4').onclick = function () { ir('meusdocs'); }; };
 TELAS.retomar = function () {
   return fala('Digite o telefone e a data de nascimento que você informou no cadastro.') +
     '<div class="cartao"><label class="campo">Telefone<input type="tel" id="r-cod" autocomplete="tel"></label>' +
@@ -679,6 +714,45 @@ TELAS.agendada = function () {
   return fala([esc(G.T.mensagens.consultaAgendada)]) + '<div class="rapidas"><button class="rapida" type="button" id="b0">Ver, confirmar, remarcar ou cancelar minha consulta</button><button class="rapida" type="button" id="b1">Preencher meu cadastro agora</button><button class="rapida" type="button" id="b2">Continuar de onde parei</button><button class="rapida" type="button" id="b3">Ver orientações para a consulta</button></div>';
 };
 TELAS.agendada.depois = function () { $('#b0').onclick = function () { ir('minhaConsulta'); }; $('#b1').onclick = function () { ir('boasvindas'); }; $('#b2').onclick = function () { ir('retomar'); }; $('#b3').onclick = function () { $('#app').insertAdjacentHTML('beforeend', fala('<b>Orientações</b><br>' + G.T.orientacoes.map(esc).join('<br>'))); }; };
+/* "Meus documentos": o paciente vê só os próprios documentos, depois de confirmar um código enviado ao e-mail dele. */
+TELAS.meusdocs = function () {
+  return fala('Para sua segurança, seus documentos só aparecem depois de um código que enviamos para o seu e-mail.') +
+    '<div class="cartao"><div class="grade"><label class="campo">Telefone do cadastro<input type="tel" id="md-tel" autocomplete="tel"></label>' + campoDataHTML('md-nasc', 'Data de nascimento') + '</div>' +
+    '<div id="md-cod" hidden><label class="campo">Código de 6 dígitos<input type="text" id="md-codigo" inputmode="numeric" autocomplete="one-time-code" maxlength="6"></label></div>' +
+    '<div id="msg"></div><button class="btn" type="button" id="md-ok">Enviar código</button></div>';
+};
+TELAS.meusdocs.depois = function () {
+  var fase = 'pedir';
+  $('#md-ok').onclick = function () {
+    var b = this, tel = $('#md-tel').value, nasc = $('#md-nasc').value;
+    if (!tel || !nasc) { mostrarErro({ msg: 'Preencha o telefone e a data de nascimento.' }, '#msg'); return; }
+    b.disabled = true;
+    if (fase === 'pedir') {
+      chamar('apiDocsCodigo', nasc, tel).then(function (r) { b.disabled = false; fase = 'abrir'; $('#md-cod').hidden = false; b.textContent = 'Ver meus documentos'; $('#msg').innerHTML = '<p class="nota">' + esc(r.mensagem) + '</p>'; $('#md-codigo').focus(); })
+        .catch(function (e) { b.disabled = false; mostrarErro(e, '#msg'); });
+      return;
+    }
+    var c = ($('#md-codigo').value || '').replace(/\D/g, '');
+    if (c.length !== 6) { b.disabled = false; $('#md-codigo').focus(); return; }
+    chamar('apiDocsAbrir', nasc, tel, c).then(function (r) { G.meusDocs = r; ir('meusdocsLista'); }).catch(function (e) { b.disabled = false; mostrarErro(e, '#msg'); });
+  };
+};
+TELAS.meusdocsLista = function () {
+  var d = (G.meusDocs && G.meusDocs.docs) || [];
+  return fala(d.length ? 'Estes são os seus documentos. Toque para baixar.' : 'Ainda não há documentos liberados para você. Se precisar de algum, fale com a equipe.') +
+    '<div class="docs-lista">' + d.map(function (x) { return '<div class="doc"><span>' + esc(x.titulo) + '<br><span class="nota">' + esc(String(x.data || '').split('-').reverse().join('/')) + '</span></span><button class="btn" type="button" data-doc="' + esc(x.id) + '">Baixar</button></div>'; }).join('') + '</div><div id="msg"></div>' +
+    '<p class="nota">Por segurança, esta página fecha sozinha em 20 minutos. Não compartilhe seus documentos de saúde.</p>';
+};
+TELAS.meusdocsLista.depois = function () {
+  document.querySelectorAll('[data-doc]').forEach(function (b) { b.onclick = function () {
+    b.disabled = true; b.textContent = 'Baixando…';
+    chamar('apiDocsBaixar', G.meusDocs.sessao, b.dataset.doc).then(function (r) {
+      var bin = atob(r.base64), u8 = new Uint8Array(bin.length); for (var i = 0; i < bin.length; i++) u8[i] = bin.charCodeAt(i);
+      var url = URL.createObjectURL(new Blob([u8], { type: r.tipo })), a = document.createElement('a'); a.href = url; a.download = r.nome; document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(function () { URL.revokeObjectURL(url); }, 30000); b.disabled = false; b.textContent = 'Baixado ✓';
+    }).catch(function (e) { b.disabled = false; b.textContent = 'Baixar'; mostrarErro(e, '#msg'); });
+  }; });
+};
 TELAS.minhaConsulta = function () {
   return fala(esc(G.T.mensagens.minhaConsulta)) + '<div class="cartao"><div class="grade"><label class="campo">Telefone usado no agendamento<input type="tel" id="mc-tel" autocomplete="tel"></label>' + campoDataHTML('mc-nasc', 'Data de nascimento') + '</div><div id="msg"></div><button class="btn" type="button" id="mc-ok">Buscar minha consulta</button></div>';
 };
@@ -1096,7 +1170,7 @@ lerLocal(function (loc) {
       vigiar(); return;
     }
     // Atalhos do link (?ir=agendar, consulta, documentos, info, equipe, novo): abrem direto a tela certa; "Voltar" leva ao menu.
-    var ATALHOS = { orientacoes: 'orientacoes', clinica: 'clinica', google: 'google', pesquisa: 'pesquisa', espera: 'espera', agendar: 'agendar', consulta: 'minhaConsulta', documentos: 'documentosMenu', info: 'info', equipe: 'equipe', novo: 'boasvindas' };
+    var ATALHOS = { orientacoes: 'orientacoes', clinica: 'clinica', google: 'google', pesquisa: 'pesquisa', espera: 'espera', agendar: 'agendar', consulta: 'minhaConsulta', documentos: 'documentosMenu', info: 'info', equipe: 'equipe', novo: 'boasvindas', meusdocs: 'meusdocs' };
     var alvo = !G.convite && ATALHOS[p.ir];
     if (salvo && salvo.token) { G.token = salvo.token; G.codigo = salvo.codigo; G.dados = salvo.dados; G.qi = salvo.qi || 0; G.tela = salvo.tela || 'identificacao'; }
     if (alvo && !(p.ir === 'documentos' && G.token)) { G.pilha = ['inicio']; G.tela = alvo; }
