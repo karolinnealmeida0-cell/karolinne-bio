@@ -32,7 +32,15 @@ a{color:#765442}a:hover{color:#4f382c}
 @media (max-width:720px){.hide-sm{display:none}}
 </style>
 
-<style>html{scroll-behavior:smooth}img{max-width:100%}</style>
+<style>html{scroll-behavior:smooth}img{max-width:100%}
+.fixo{position:fixed;left:0;right:0;bottom:0;z-index:50;background:#4f382c;color:#FAF8F4;box-shadow:0 -6px 24px rgba(0,0,0,.18);font-family:Montserrat,system-ui,sans-serif}
+.fixo .wrap{display:flex;align-items:center;justify-content:space-between;gap:14px;padding-top:12px;padding-bottom:12px}
+.fixo p{margin:0;font-size:15px;line-height:1.35}.fixo strong{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:600;display:block}
+.fixo .btnlight{min-height:46px;padding:0 22px;font-size:15px;white-space:nowrap}
+.fixo-x{background:none;border:0;color:#F4E9DF;font-size:26px;line-height:1;cursor:pointer;min-width:44px;min-height:44px}
+body.com-fixo{padding-bottom:96px}
+@media (max-width:560px){.fixo .sub{display:none}.fixo strong{font-size:19px}.fixo .btnlight{padding:0 16px}}
+</style>
 </head>
 <body>
 
@@ -201,6 +209,17 @@ Agendar pelo WhatsApp</a>
 <p style="margin: 18px 0 0; font-size: 15px; color: #F4E9DF">(21) 97491-1497</p>
 </div>
 </section>
+
+<div class="fixo" id="fixo" role="region" aria-label="Clareamento dental">
+<div class="wrap">
+<p><strong>Clareamento dental</strong><span class="sub">Avaliação antes, para indicar o clareamento certo para você.</span></p>
+<div style="display: flex; align-items: center; gap: 6px">
+<a class="btnlight" href="https://wa.me/5521974911497?text=Ol%C3%A1%2C%20Dra.%20Karolinne%21%20Vim%20pelo%20site%20e%20quero%20saber%20sobre%20o%20clareamento.">Quero clarear</a>
+<button class="fixo-x" type="button" aria-label="Fechar aviso" onclick="document.getElementById('fixo').remove();document.body.classList.remove('com-fixo')">×</button>
+</div>
+</div>
+</div>
+<script>document.body.classList.add('com-fixo');</script>
 
 <footer style="background: #FAF8F4; padding: 40px 0">
 <div class="wrap" style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 24px; font-size: 14px; color: #5a4436">
